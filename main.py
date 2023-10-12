@@ -1,17 +1,24 @@
 T = int(input())
-for tc in range(1,T+1):
 
-    n = int(input())
-    ary = [False] * 10
-    i = 1
-    cnt = 0
-    while cnt != 10:
+for test_case in range(1,T+1):
 
-        sleep = str(n*i)
+    P,Q,R,S,W = map(int,input().split())
 
-        for j in sleep:
-            if ary[int(j)] == False:
-                ary[int(j)] = True
-                cnt +=1
-        i += 1
-    print("#{} {}".format(tc,n*(i-1)))
+    A_Pay = P * W
+    B_Pay = Q
+    result = 0
+
+    if W > R :
+        B_Pay = Q + (W-R) * S
+        if A_Pay > B_Pay:
+            result = B_Pay
+        else:
+            result = A_Pay
+    else:
+        B_Pay = Q
+        if A_Pay > B_Pay:
+            result = B_Pay
+        else:
+            result = A_Pay
+
+    print("#{} {}".format(test_case,result))
