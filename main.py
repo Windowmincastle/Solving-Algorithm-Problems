@@ -1,24 +1,14 @@
-T = int(input())
+natural_number = set(range(1,10001))
+generated_number = set()
 
-for test_case in range(1,T+1):
+for i in range(1,10001):
 
-    P,Q,R,S,W = map(int,input().split())
+    for j in str(i):
+        i += int(j)
 
-    A_Pay = P * W
-    B_Pay = Q
-    result = 0
+    generated_number.add(i)
 
-    if W > R :
-        B_Pay = Q + (W-R) * S
-        if A_Pay > B_Pay:
-            result = B_Pay
-        else:
-            result = A_Pay
-    else:
-        B_Pay = Q
-        if A_Pay > B_Pay:
-            result = B_Pay
-        else:
-            result = A_Pay
+self_number = sorted(natural_number - generated_number)
 
-    print("#{} {}".format(test_case,result))
+for i in self_number:
+    print(i)
