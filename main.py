@@ -1,14 +1,19 @@
-natural_number = set(range(1,10001))
-generated_number = set()
+import math
+TC = int(input())
 
-for i in range(1,10001):
+for test_case in range(1,TC+1):
 
-    for j in str(i):
-        i += int(j)
+    a,b = map(int,input().split())
+    cnt = 0
 
-    generated_number.add(i)
+    for i in range(a,b+1):
+        r = math.sqrt(i)
 
-self_number = sorted(natural_number - generated_number)
+        if r == int(r): # i의 제곱근이 정수일때만 정수 비교
+            i = str(i) # 캐스팅
+            r = str(int(r)) # 캐스팅
 
-for i in self_number:
-    print(i)
+            if i == i[::-1] and r == r[::-1]: #펠린드롬 판별
+                cnt += 1
+
+    print(f"#{test_case} {cnt}")
