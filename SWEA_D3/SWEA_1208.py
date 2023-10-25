@@ -41,6 +41,10 @@ https://swexpertacademy.com/main/code/problem/problemDetail.do?problemLevel=3&co
 (문제는 중복되는 최고점과 최저점을 어떻게 구분하냐는건데?)
 반복을 시작하기전에 덤프의 수를 체크해서 덤프가 0 이면 종료 or break
 
+느낀점
+또 문제는 문제를 정확하게 이해하는 것이다
+완료 된 후! 이런거 잘 읽자
+
 '''
 for tc in range(1,11):
 
