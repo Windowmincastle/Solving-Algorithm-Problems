@@ -10,7 +10,7 @@ def count(arr):
             else:
                 if cnt == K:
                     ret += 1
-                cnt = 0
+                cnt = 0 # 어쨋든 0을 만나면 cnt를 초기화 해야하기 때문에 else와 관계없이 0으로 초기화 해야한다.
     return ret
 
 T = int(input())
