@@ -1,5 +1,5 @@
-import sys
-sys.stdin = open("input.txt", "r")
+# import sys
+# sys.stdin = open("input.txt", "r")
 
 def myf(lst, ip ):
     highidx = 0  # 가장 높은 인덱스 저장할 변수
