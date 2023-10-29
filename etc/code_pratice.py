@@ -1,4 +1,3 @@
-from collections import deque
 
 #공백을 구분으로 여러개 변수 입력받는법
 
