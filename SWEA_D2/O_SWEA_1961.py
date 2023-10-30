@@ -1,5 +1,5 @@
 '''
-SWEA D2 1954 달팽이 숫자
+SWEA D2 1961 숫자 배열 회전
 https://swexpertacademy.com/main/code/problem/problemDetail.do?problemLevel=2&contestProbId=AV5Pq-OKAVYDFAUq&categoryId=AV5Pq-OKAVYDFAUq&categoryType=CODE&problemTitle=&orderBy=FIRST_REG_DATETIME&selectCodeLang=ALL&select-1=2&pageSize=30&pageIndex=1
 
 푸는데 1시간 30분 정도 걸린 것 같다
@@ -9,6 +9,9 @@ https://swexpertacademy.com/main/code/problem/problemDetail.do?problemLevel=2&co
 이런 문제 유형이 나오면 전치행렬을 뒤집는 방식을 활용하면 좋을 것 같다
 그리고 A4 용지를 한장 크게 N x N으로 숫자를 채우고 90도로 돌려보는 방식을
 직접 눈 앞에서 해보니까 이해하는데 됐따
+
+참고 링크
+https://velog.io/@yb_engineer/Algorithm-SWEA-1961.%EC%88%AB%EC%9E%90%EB%B0%B0%EC%97%B4%ED%9A%8C%EC%A0%84-python
 
 '''
 import sys
@@ -44,7 +47,7 @@ for tc in range(1,T+1):
     f270 = flip(t270)
 
     print(f"#{tc}")
-    for i in range(N):
+    for i in range(N): # 이 출력 포맷 익숙치 않음. 연습하기
         for row in f90, f180, f270:
             print("".join(map(str, row[i])), end=' ')
         print()
