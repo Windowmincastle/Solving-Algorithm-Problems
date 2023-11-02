@@ -8,6 +8,10 @@ https://swexpertacademy.com/main/code/problem/problemDetail.do?problemLevel=2&co
 다시 풀어봐라
 힌트 = 반복문 인덱스 범위 설정이 중요하다
 
+참고 풀이
+https://velog.io/@tyjk8997/SWEA-%EB%91%90-%EA%B0%9C%EC%9D%98-%EC%88%AB%EC%9E%90%EC%97%B4python
+https://unie2.tistory.com/989
+abc
 '''
 #
 import sys
