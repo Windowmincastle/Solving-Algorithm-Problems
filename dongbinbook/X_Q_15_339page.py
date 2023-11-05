@@ -28,16 +28,14 @@ distance[X] = 0
 
 #큐에다가 리스트를 넣어서 리스트를 뺀다.
 q = deque([X])
-
 while q:
-
     # 큐에 들어가있는 현재 노드 번호를 cuurent_city에 뺀다.
     current_city = q.popleft()
     # 다음 도시를 순차적으로 next_city에 저장하고, graph[1]번 도시에 연결되어있는 도시들을 next_city에 순차적으로 가져오자
     for next_city in graph[current_city]:
         # graph[cuurent_city] = graph[1]번 도시에 연결된 도시가 방문하지 않은 곳 이라면?
         if distance[next_city] == -1: # -1로 구분
-            # 최단 거리 갱신
+            # 최단 거리 갱신       거리 갱신 테이블에서 시작 도시부터 현재 도시까지 갱신 거리에 +1을 하고 next_City에 저장하는 것
             distance[next_city] = distance[current_city] + 1 # 현재 도시에서 거리가 1차이 나니까 현재도시 + 1
             #40라인 거리 정보를 갱신하는 것 이다.
             q.append(next_city) # 큐에 next_city를 넣는다.
