@@ -28,7 +28,7 @@ def bfs(si,sj):
             ni = ci + dx[i]
             nj = cj + dy[i]
             # 4방향 , 범위이내 , 벽이아닐때(1) , 미방문 조건일시
-            if 0 <= ni < N and 0 <= nj < N and v[ni][nj] ==0 and arr[ni][nj] != 1 :
+            if 0 <= ni < N and 0 <= nj < N and v[ni][nj] == 0 and arr[ni][nj] != 1 :
                 q.append((ni,nj))
                 v[ni][nj] = v[ci][cj] + 1
     return 0 # 목적지에 도달 못 한 경우
