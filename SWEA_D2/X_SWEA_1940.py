@@ -9,3 +9,4 @@ https://swexpertacademy.command/main/code/problem/problemDetail.do?problemLevel=
 T = int(input())
 
 for tc in range(1,T+1):
+    print("아직 안함")

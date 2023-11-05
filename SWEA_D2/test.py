@@ -1,33 +1,46 @@
-import sys
-sys.stdin =open("input.txt","r")
+'''
+Q_15_339페이지
+특정 거리의 도시 찾기
 
-def solve():
-    # 가로 체크
-    for lst in arr:
-        if len(set(lst)) != N:
-            return 0 # 실패
-    #전치 행렬
-    arr_t = list(map(list,zip(*arr)))
+모든 간선의 비용이 동일할 때는 BFS를 이용하여 최단거리를 찾을 수 있다.
+"모든 도로의 거리는 1' 이라는 조건 덕분에 BFS를 이용해서 간단히 해결 가능.
 
-    # 세로 체크
-    for lst in arr_t:
-        if len(set(lst)) != N:
-            return 0
+'''
+from collections import deque
 
-    # 3x3 퍼즐 체크
-    for i in range(0,9,3): # 0~9까지 3씩 증가하면서 i값 0,3,6
-        for j in range(0,9,3): # 0~9까지 증가하면서 j값 0,3,6
-            lst = arr[i][j:j+3] + arr[i+1][j:j+3] + arr[i+2][j:j+3]
-            # arr[0][0~3] 값 + arr[1][0~3] 값 + arr[2][0~3]값 을 더해서 lst에 초기화
-            if len(set(lst)) != N:
-                return 0
-    return 1
+# 도시의 개수, 도로의 개수, 거리 정보, 출발 도시 번호
+n, m, k, x = map(int, input().split())
+graph = [[] for _ in range(n + 1)]
 
-T=int(input())
+# 모든 도로 정보 입력 받기
+for _ in range(m):
+    a, b = map(int, input().split())
+    graph[a].append(b) # a는 도시 , b는 연결된 도시
 
-for tc in range(1,T+1):
-    N=9 # N을 9로 고정
-    arr = [list(map(int,input().split())) for _ in range (N)] # 9x9 퍼즐 받기, 가로 체크
-    ans = solve()
+# 모든 도시에 대한 최단 거리 초기화
+distance = [-1] * (n + 1)
+distance[x] = 0 # 출발 도시까지의 거리는 0으로 설정
 
-    print(f"#{tc} {ans}")
+# 너비 우선 탐색(BFS) 수행
+q = deque([x])
+
+while q:
+    now = q.popleft() # 현재 도시를 큐에서 뺸다
+    # 현재 도시에서 이동할 수 있는 모든 도시를 확인
+    for next_node in graph[now]:
+        # 아직 방문하지 않은 도시라면
+        if distance[next_node] == -1:
+            # 최단 거리 갱신
+            distance[next_node] = distance[now] + 1
+            q.append(next_node)
+
+# 최단 거리가 K인 모든 도시의 번호를 오름차순으로 출력
+check = False
+for i in range(1, n + 1):
+    if distance[i] == k:
+        print(i)
+        check = True
+
+# 만약 최단 거리가 K인 도시가 없다면, -1 출력
+if check == False:
+    print(-1)
