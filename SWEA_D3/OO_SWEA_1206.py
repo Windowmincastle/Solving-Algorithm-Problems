@@ -3,6 +3,25 @@ D3 1206 - View
 문제 링크
 https://swexpertacademy.com/main/code/problem/problemDetail.do?problemLevel=3&contestProbId=AV134DPqAA8CFAYh&categoryId=AV134DPqAA8CFAYh&categoryType=CODE&problemTitle=S%2FW&orderBy=RECOMMEND_COUNT&selectCodeLang=ALL&select-1=3&pageSize=30&pageIndex=1
 '''
+
+'''
+2번째 풀었는데 생각보다 깔끔하게 잘 풀엇다. 옛날 코드보다 나은듯
+T = 10
+for tc in range(1,T+1):
+
+    N = int(input())
+    h = list(map(int,input().split())) # 건물 높이 리스트
+
+    ans = 0
+    for i in range(2,N-1): # 좌우측 2칸은 항상 건물의 높이가 0 이다.
+        tmp = 0
+        # 건물 i의 좌우측 2칸의 건물 높이가 i 건물의 높이보다 낮은지 체크
+        if h[i] > h[i-1] and h[i] > h[i-2] and h[i] > h[i+1] and h[i] > h[i+2]:
+            tmp = max(h[i-1],h[i-2],h[i+1],h[i+2]) # 조건에 만족하면 좌우측 4개의 건물 중 가장 높은 건물을 tmp에 저장
+            ans += h[i] - tmp # 현재 건물 i의 높이와 tmp를 뺀다.
+
+    print(f"#{tc} {ans}")
+'''
 for tc in range(1,10+1):
     #맨 처음에는 건물의 개수와 높이를 이차원 리스트로 시각적으로 표현해서 각 좌표에 모두 접근해서 -1 , -2 , +1 , +2를 하려고 했는데
     #잘못된 접근이였다. 문제 이해를 잘못했다. count에 건물이 100개인지 10개인지 50개인지 입력받는 것 이다.
