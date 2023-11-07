@@ -6,6 +6,9 @@ SWEA D4 Ladder1
 힌트 - if elif else를 사용해서 좌,우,상단을 체크
 왔던 길 막기, 좌표 value 변경. 사다리 맵 패딩 - 11월 7일 오전 1시 43분
 
+print(arr[99].index(2)) 이렇게
+index 메서드를 사용해서 특정 위치에 있는 값의 좌표를 찾을 수 있다.
+
 '''
 from collections import deque
 import sys
