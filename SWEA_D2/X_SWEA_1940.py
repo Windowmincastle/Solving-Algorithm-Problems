@@ -1,7 +1,6 @@
 '''
 SWEA D2 1940 가랏! RC카
 다시 풀어보기 현재 11월 5일 - 노션에 정리햇음
-
 '''
 import sys
 sys.stdin = open("input.txt","r")
