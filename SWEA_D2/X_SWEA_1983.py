@@ -1,22 +1,7 @@
-# T = int(input())
-#
-# for tc in range(1,T+1):
-#
-#     n,k = map(int,input().split())
-#     student = [ list(map(int,input().split())) for _ in range(n) ]
-#
-#     grade = []
-#     for i in range(len(student)):
-#         for j in range(1):
-#             exam1 = student[i][j] * 0.35
-#             exam2 = student[i][j+1] * 0.45
-#             homework = student[i][j+2] * 0.20
-#             grade.append(int(exam1+exam2+homework))
-#
-#     grade =['A+','A0','A-','B+','B-','C+','C-','D0']
-#
-#     print(f"#{tc} {grade[k]}")
-# 이 코드는 내가 실패한 코드 아래는 참고한 코드
+'''
+11월 10일 금요일 2번째 풀이한 날, 노션에 기록함.
+
+'''
 
 grade = ['A+', 'A0', 'A-', 'B+', 'B0', 'B-', 'C+', 'C0', 'C-', 'D0']
 

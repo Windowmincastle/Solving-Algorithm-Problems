@@ -21,60 +21,9 @@ k의 수가 주어지는데 x,y 요소에 다 접근해서 k의 수를 세다가
 다음 x,y를 체크하는데 그곳이 0이거나 , 좌표의 끝이면
 cnt와 k를 체크해보면 되지않겟니?
 '''
-# #------------내가 푼 틀린 코드 -----
-# T = int(input())
-#
-# for tc in range(1,T+1):
-#
-#     n,k = map(int,input().split())
-#     data = [list(map(int, input().split())) for _ in range(n)]
-#     # print(data)
-#
-#     cnt = 0
-#     sum = 0
-#     for i in range(n):
-#         for j in range(n-k):
-#             for l in range(k):
-#                 sum += data[i][j+l]
-#                 if data[i][k+1] != 0:
-#                     cnt += 1
-#
-#     print(f"#{tc} {cnt}")
-
-# t = int(input())
-#
-# for tc in range(1, t + 1):
-#     n, k = map(int, input().split())
-#     data = [list(map(int, input().split())) for _ in range(n)]
-#
-#     result = 0
-#     # 가로 확인
-#     for i in range(n):
-#         cnt = 0
-#         for j in range(n):
-#             if data[i][j] == 1:
-#                 cnt += 1
-#             if data[i][j] == 0 or j == n - 1:
-#                 if cnt == k:
-#                     result += 1
-#                 if data[i][j] == 0:
-#                     cnt = 0
-#
-#     # 세로 확인
-#     for i in range(n):
-#         cnt = 0
-#         for j in range(n):
-#             if data[j][i] == 1:
-#                 cnt += 1
-#             if data[j][i] == 0 or j == n - 1:
-#                 if cnt == k:
-#                     result += 1
-#                 if data[j][i] == 0:
-#                     cnt = 0
-#
-#     print('#%d %d' % (tc, result))
-'''10월 27일에 다시 풀어보는 swea 1979 문제 시간제한 1시간 '''
-''' 성공 ! '''
+'''
+11월 10일 3번째 풀이 했는데 정답에 거의 근접했으나 틀렸다. 다시 풀어보기 노션에 정리했음.
+'''
 import sys
 sys.stdin = open("input.txt", "r")
 # 하 진짜 바보 바보 핵 바보 아주 사소한 실수로 헤매네 ;;

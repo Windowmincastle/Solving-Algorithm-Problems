@@ -1,6 +1,7 @@
 '''
 SWEA D4 Ladder2
 https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14BgD6AEECFAYh
+1차 실패 - 날짜, 11월 10일
 
 '''
 import sys
