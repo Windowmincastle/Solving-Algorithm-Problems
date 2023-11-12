@@ -1,59 +1,39 @@
+# import sys
+# sys.stdin = open('input.txt','r')
 from collections import deque
 
-# 8방향
-dr = [[-1, 0], [1, 0], [0, -1], [0, 1], [-1, -1], [-1, 1], [1, -1], [1, 1]]
-def bfs(ni, nj):
-    # 특정 위치 주변에 지뢰가 몇 개 있는지를 확인하는 함수
-    tmp = 0
-    for d in dr:
-        dx, dy = ni + d[0], nj + d[1]
-        # 주변 8방향을 검사, 범위이내이며 dx,dy가 *인 조건
-        if 0 <= dx < N and 0 <= dy < N and arr[dx][dy] == '*':
-            # 지뢰 '*'를 발견하면 지뢰 개수 증가
-            tmp += 1
+def bfs(s):
+    q = deque()
+    v = [0]*101
 
-    arr[ni][nj] = tmp  # 해당 위치에 지뢰 개수를 업데이트
+    q.append(s)
+    v[s] = 1
+    ans = s
 
-def check(nr, nc):
-    # 클릭한 지점이 0일 때, 주변에 있는 모든 0인 지점을 '*'로 바꾸는 함수
-    Q = deque()
-    Q.append([nr, nc])
-    arr[nr][nc] = '*'  # 클릭한 지점을 '*'로 표시
-    while Q:
-        ni, nj = Q.popleft()
-        for d in dr:
-            dx, dy = ni + d[0], nj + d[1]
-            if 0 <= dx < N and 0 <= dy < N:
-                if arr[dx][dy] == 0:
-                    # 주변에 0이면 '*'로 바꾸고 큐에 추가
-                    arr[dx][dy] = '*'
-                    Q.append([dx, dy])
-                elif arr[dx][dy] != '*':
-                    # 주변에 이미 '*'이 아닌 값이면 '*'로 변경
-                    arr[dx][dy] = '*'
+    while q:
+        cur = q.popleft()
 
-T = int(input())
-for tc in range(1, T+1):
-    N = int(input())
-    arr = [list(input()) for _ in range(N)] # 지뢰판
+        if v[ans] < v[cur] or (v[ans] == v[cur] and ans < cur):
+            ans = cur
 
-    for i in range(N):
-        for j in range(N):
-            if arr[i][j] == '.':
-                bfs(i, j)  # '.'인 지점에 대해 주변 지뢰 개수를 계산
+        for next in adj[cur]:
+            if v[next] == 0:
+                q.append(next)
+                v[next] = v[cur] + 1
 
+    return ans
 
-    cnt = 0
-    for i in range(N):
-        for j in range(N):
-            if arr[i][j] == 0:
-                cnt += 1
-                check(i, j)  # 0인 지점을 클릭하고 연쇄적으로 처리
+T=10
+for tc in range(1,T+1):
 
-    # 남은 숫자 갯수 세기
-    for i in range(N):
-        for j in range(N):
-            if arr[i][j] != '*':
-                cnt += 1
+    n , s = map(int,input().split())
+    lst = list(map(int,input().split()))
+    adj = [[] for _ in range(101)]
 
-    print(f'#{tc} {cnt}')
+    for i in range(0,len(lst),2):
+        p,c = lst[i],lst[i+1]
+        adj[p].append(c)
+
+    ans = bfs(s)
+
+    print(f'#{tc} {ans}')
