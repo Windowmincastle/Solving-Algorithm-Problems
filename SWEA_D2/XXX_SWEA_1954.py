@@ -2,6 +2,7 @@
 SWEA D2 1954 달팽이 숫자
 https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5PobmqAPoDFAUq
 11월 6일 2번째 풀이 정답에 근사하게 코드를 만들었으나 정답을 봣음. 다시 풀기
+11월 12일 또 틀림
 
 '''
 import sys

@@ -32,7 +32,6 @@ for tc in range(1,T+1):
 
     repeat = len(maxlst) - len(minlst) # 왜 +1을 해야하지?
     ans = 0
-    print(repeat)
     for i in range(repeat+1): # 반복문 범위가 틀렷엇나보다...시발
         tmp = 0
         for j in range(len(minlst)):

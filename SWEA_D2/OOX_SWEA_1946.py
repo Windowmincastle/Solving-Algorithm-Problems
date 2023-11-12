@@ -2,6 +2,8 @@
 
 꼭 다시 풀기 - 현재 날짜 11월 5일 - 노션에 정리햇음.
 
+11월 12일 3번째 풀이 햇음.
+
 '''
 import sys
 sys.stdin = open('input.txt','r')
