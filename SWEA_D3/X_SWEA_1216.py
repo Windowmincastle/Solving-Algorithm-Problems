@@ -20,7 +20,7 @@ for tc in range(1,T+1):
     arr = [input() for _ in range(N)]
     arr2 = [''.join(x) for x in zip(*arr)] # 전치행렬 만들어서 문자열로 받는것
 
-    for leng in range(N, 1, -1): # 100부터 -1씩 감소하면서
+    for leng in range(N, 1, -1): # 100부터 -1씩 감소하면서 큰 수 부터 내려오면서 탐색하는게 조금이라도 더 빠르다.
         if pal(arr,leng) or pal(arr2,leng): # 반복문안의 if문 조건에 함수 2개를 호출
             break # 100부터 감소시키면서 회문을 찾기 때문에 회문을 찾앗을 때 보다 큰 회문 결과는 있을 수 없다
 

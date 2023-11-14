@@ -1,7 +1,5 @@
 '''
 swea d3 1209 - Sum
-https://swexpertacademy.com/main/code/problem/problemDetail.do?problemLevel=3&contestProbId=AV13_BWKACUCFAYh&categoryId=AV13_BWKACUCFAYh&categoryType=CODE&problemTitle=&orderBy=PASS_RATE&selectCodeLang=ALL&select-1=3&pageSize=10&pageIndex=6&&&&&&&&&&
-50분만에 풀엇따!! 나이스
 '''
 import sys
 sys.stdin = open("input.txt", "r")

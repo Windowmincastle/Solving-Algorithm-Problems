@@ -1,8 +1,8 @@
-# '''
-# SWEA D4 1238 Contact
-# '''
-# import sys
-# sys.stdin = open('input.txt','r')
+'''
+SWEA D4 1238 Contact
+'''
+import sys
+sys.stdin = open('input.txt','r')
 from collections import deque
 def bfs(S):
     Q = deque()
