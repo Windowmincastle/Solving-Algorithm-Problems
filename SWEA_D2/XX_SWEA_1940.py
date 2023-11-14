@@ -1,6 +1,7 @@
 '''
 SWEA D2 1940 가랏! RC카
 다시 풀어보기 현재 11월 5일 - 노션에 정리햇음
+2번째 풀이 11월 15일 수요일
 '''
 import sys
 sys.stdin = open("input.txt","r")
@@ -32,6 +33,5 @@ for tc in range(1,T+1):
         # 그러니까 0일 때는 조건을 판단할 필요가 없겟지
         # 참 답답하다..
     print(f"#{tc} {distance}") # 출력
-
 
 

@@ -1,17 +1,24 @@
-import sys
-sys.stdin=open('input.txt','r')
+# import sys
+# sys.stdin=open('input.txt','r')
 
-n = int(input())
-tmp = '-'
+T = int(input())
+for tc in range(1,T+1):
 
-for i in range(1,n+1):
+    n = int(input())
+    dtc = 0
+    spe = 0
 
-    cnt = 0
-    for j in str(i):
-        if j=='3' or j=='6' or j=='9':
-           cnt += 1
+    for i in range(n):
+        com = list(map(int,input().split()))
+        #가속
+        if com[0] == 1:
+            spe += com[1]
+        #감속
+        elif com[0] == 2:
+            if spe > com[1]:
+                spe -= com[1]
+            else:
+                spe = 0
+        dtc += spe
 
-    if cnt == 0 :
-        print(i,end=' ')
-    else:
-        print(cnt*tmp,end=' ')
+    print(f'#{tc} {dtc}')
