@@ -18,10 +18,13 @@ for tc in range(1,T+1):
     arr = [[0]+list(map(int,input().split()))+[0] for _ in range(N)]
 
     for sj in range(1,N+1):
+
         if arr[0][sj] == 0:
             continue
+
         cj = sj
         cnt = ci = dr = 0
+
         while ci < N-1:
             cnt += 1
             if dr == 0 : #현재 방향 설정이 0으로 되어있다면
