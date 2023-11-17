@@ -19,6 +19,6 @@ for tc in range(1, T + 1):
     ans = [] # counting sort 처럼
     for _ in range(P):
         t = int(input())
-        ans.append(cnt[t]) #cnt배열의 t자리의 값을 sol 리스트에 append
+        ans.append(cnt[t]) # cnt 배열의 t자리의 값을 ans 리스트에 append
 
     print(f"#{tc}", *ans)

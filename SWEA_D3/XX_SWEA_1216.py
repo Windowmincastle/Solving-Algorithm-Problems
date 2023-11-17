@@ -1,6 +1,7 @@
 '''
 1216. [S/W 문제해결 기본] 3일차 - 회문2
 https://swexpertacademy.com/main/code/problem/problemDetail.do?problemLevel=3&contestProbId=AV14Rq5aABUCFAYi&categoryId=AV14Rq5aABUCFAYi&categoryType=CODE&problemTitle=S%2FW&orderBy=FIRST_REG_DATETIME&selectCodeLang=ALL&select-1=3&pageSize=20&pageIndex=1
+11월 17일 다시 틀림
 
 '''
 import sys
