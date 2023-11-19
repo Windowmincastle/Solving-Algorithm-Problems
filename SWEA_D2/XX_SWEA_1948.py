@@ -4,33 +4,44 @@ https://swexpertacademy.com/main/code/problem/problemDetail.do?problemLevel=2&co
 
 '''
 import sys
-
 sys.stdin = open("input.txt", "r")
-months = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+month = {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
 T = int(input())
-#2번 풀이
-for tc in range(1,T+1):
-    m1 , d1, m2, d2 = map(int,input().split())
-    ans = 0
-
-    # 같은 달 위치할 경우
-    if m1 == m2 :
-        ans = d2 - d1 + 1
+for tc in range(1, T + 1):
+    ans = 1
+    m1, d1, m2, d2 = list(map(int, input().split()))
+    if m1 == m2:
+        ans += d2 - d1
     else:
-        # 시작하는 달
-        ans = months[m1] - d1 +1
-        # 중간에 있는 달
-        for i in range(m1+1,m2):
-            ans += months[i] # 중간달의 값을 더해준다.
-        # 마지막 달
-        ans += d2
-    print(f'#{tc} {ans}')
+        for i in range(m1, m2):
+            ans += month[i]
+        ans += d2 - d1
+    print(f"#{tc} {ans}")
+
+# months = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+# T = int(input())
+# #2번 풀이
+# for tc in range(1,T+1):
+#     m1 , d1, m2, d2 = map(int,input().split())
+#     ans = 0
+#
+#     # 같은 달 위치할 경우
+#     if m1 == m2 :
+#         ans = d2 - d1 + 1
+#     else:
+#         # 시작하는 달
+#         ans = months[m1] - d1 +1
+#         # 중간에 있는 달
+#         for i in range(m1+1,m2):
+#             ans += months[i] # 중간달의 값을 더해준다.
+#         # 마지막 달
+#         ans += d2
+#     print(f'#{tc} {ans}')
 
 
 # for tc in range(1,T+1):
 #
 #     m1,d1,m2,d2 = map(int,input().split())
-#
 #     all_day = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365]
 #
 #     ans = (d2 + all_day[m2-1]) - (d1 + all_day[m1-1])+1

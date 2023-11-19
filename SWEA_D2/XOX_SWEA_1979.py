@@ -34,7 +34,7 @@ T = int(input())
 for tc in range(1,10+1):
 
     n,k= map(int,input().split()) # n,k 입력
-    arr = [list(map(int, input().split()))+[0] for _ in range(n)]+[[0]*(n+1)] # 퍼즐 입력받을때 0으로 패딩해서 받기
+    arr = [list(map(int, input().split()))+[0] for _ in range(n)] + [[0]*(n+1)] # 퍼즐 입력받을때 0으로 패딩해서 받기
     arr_t = list(map(list, zip(*arr))) # 퍼즐을 전치 행렬로 만들기
     ans = 0
 

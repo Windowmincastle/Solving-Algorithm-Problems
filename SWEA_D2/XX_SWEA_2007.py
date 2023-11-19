@@ -13,8 +13,8 @@ for tc in range(1,T+1):
 
     S = input()
     for i in range(1,10):
-        # print(f'i -> {i} , s[:i] => {S[:i]}',end=' ') # 찍어보기
-        # print(f' S[i:2*i] ->{S[i:2*i]}',end=' ') # 찍어보기
+        print(f'i -> {i} , s[:i] => {S[:i]}',end=' ') # 찍어보기
+        print(f' S[i:2*i] ->{S[i:2*i]}',end=' ') # 찍어보기
         if S[:i] == S[i:2*i]:
             print(f'#{tc} {i}')
             break

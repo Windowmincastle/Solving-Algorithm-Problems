@@ -15,10 +15,9 @@ for tc in range(1,T+1):
     ctr = list(map(int,input().split()))
 
     ctr_time = min(ctr)
-    print(f"가장 빨리 오는 손님 시간 {min(ctr)}, 제조 시간 {M}")
-
+    # print(f"가장 빨리 오는 손님 시간 {min(ctr)}, 제조 시간 {M}")
     ctr_cnt = len(ctr)
-    print(f"손님 숫자 {ctr_cnt} , 붕어빵 개수 {K}")
+    # print(f"손님 숫자 {ctr_cnt} , 붕어빵 개수 {K}")
     ans =""
     if M <= ctr_time and ctr_cnt <= K:
         ans = "Possible"

@@ -15,6 +15,7 @@ https://swexpertacademy.com/main/code/problem/problemDetail.do?problemLevel=2&co
 '''
 import sys
 sys.stdin=open('input.txt','r')
+
 def rotate(arr):
     arr_r = [[0]*N for _ in range(N)] #반환 배열 생성
                 # [1,2,3] 인 상황이면
