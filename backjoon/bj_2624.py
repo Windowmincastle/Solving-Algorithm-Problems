@@ -3,9 +3,6 @@
 23년 11월 27일 월요일
 -틀렷다 다시 풀어라
 '''
-import sys
-input = sys.stdin.readline
-A = int(input())
 T = int(input()) # 지폐의 금액
 K = int(input()) # 동전의 가지 수
 coins = [] # 동전 정보
