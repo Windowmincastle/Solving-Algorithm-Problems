@@ -1,35 +1,50 @@
-# import sys
-# sys.stdin = open('input.txt','r')
-from collections import deque
 
-def bfs(ci,cj):
-    q = deque()
-    v = [[0] * n for _ in range(n)]
+# 터널의 종류에 따른 좌표 이동 정의.
+p = [[0,0,0,0],
+     [1,1,1,1],
+     [1,1,0,0],
+     [0,0,1,1],
+     [1,0,0,1],
+     [0,1,0,1],
+     [0,1,1,0],
+     [1,0,1,0]]
 
-    q.append((si,sj))
-    v[si][sj] = 1
+opp = [1,0,3,2]
 
-    while q:
-        ci,cj = q.popleft()
+di, dj = [-1,1,0,0],[0,0,-1,1]
 
-        if arr[ci][cj] == 3:
-            return v[ci][cj]
+def bfs(si,sj):
+    q = [] #큐
+    v = [[0] * M for _ in range(N)]#방문테이블
+    ans = 0 #정답처리 변수
 
-        #상 하 좌 우 탐색
-        for di,dj in ((-1,0),(1,0),(0,-1),(0,1)):
-            ni = ci+di
-            nj = cj+dj
-            if 0<= ni < n and 0 <= nj <n and v[ni][nj]== 0 and arr[ni][nj] != 1:
-                q.append((ni,nj))
-                v[ni][nj] = 1
-    return 0
+    q.append((si,sj)) # 삽입
+    v[si][sj] = 1 # 방문 처리
+    ans += 1 # 카운트 1
 
-T = 10
+    while q: # 큐에 데이터가 있는동안
+
+        ci,cj = q.pop(0)
+        #꺼냇으면 정답 처리 여기서 하자
+        if v[ci][cj] == L:
+            return ans
+
+        # 4방향, 범위내, 조건(현위치 - 이동할 위치 모두 파이프 있는경우)
+        for dr in range(4):
+            ni = ci+di[dr]
+            nj = cj+dj[dr]
+            if 0 <= ni < N and 0 <= nj < M and v[ni][nj] == 0 and p[arr[ci][cj]][dr] == 1 and p[arr[ni][nj]][
+                opp[dr]] == 1:
+                q.append((ni, nj))
+                v[ni][nj] = v[ci][cj] + 1
+                ans += 1
+    return ans  # 가능한 위치보다 더 긴 시간을 준 경우..
+
+T = int(input())
 for tc in range(1,T+1):
+    #세로 크기, 가로 크기 , 세로 위치 ,가로 위치 , 시간
+    N,M,R,C,L = map(int,input().split())
+    arr = [list(map(int,input().split())) for _ in range(N)]
 
-    _ = int(input())
-    n = 16
-    arr = [ list(map(int,input())) for _ in range(n)]
-    si,sj = 1,1
-    ans = bfs(si,sj)
+    ans = bfs(R,C)
     print(f'#{tc} {ans}')
