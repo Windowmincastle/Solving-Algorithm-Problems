@@ -1,6 +1,8 @@
 '''
 이코테 with 파이썬
 96페이지 숫자 카드게임
+
+맞춤
 '''
 import sys
 sys.stdin=open('input.txt','r')
