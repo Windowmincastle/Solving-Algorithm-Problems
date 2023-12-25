@@ -1,33 +1,26 @@
-# import sys
-# sys.stdin=open('input.txt','r')
-
-# 상 , 하 , 좌 , 우
-di = [-1, 1, 0, 0]
-dj = [0, 0, -1, 1]
-def bfs(si,sj):
+def bfs(si,sj,ei,ej):
+    #큐 생성 , 방문 처리 테이블 생성
     q = []
     v = [[0] * M for _ in range(N)]
-
-    #큐에 넣고 방문처리
+    #큐에 삽입하고 방문처리
     q.append((si,sj))
     v[si][sj] = 1
 
+    # 큐가 빌때까지 반복
     while q:
-
         ci,cj = q.pop(0)
-        # if ci == N and cj == M:
-        #     return v[ci][cj]
-
-        for i in range(4):
-            ni = ci+di[i]
-            nj = cj+dj[i]
-            if 0 <= ni < N and 0 <= nj < M and v[ni][nj] == 0 and arr[ni][nj] == 1 :
-                q.append((ni,nj))
-                v[ni][nj] = v[ci][cj] + 1
-
-    return v[N-1][M-1]
+        #만약 현재 큐에서 꺼낸 좌표가 종료 좌표와 같다면
+        if (ci,cj) == (ei,ej):
+            return v[ei][ej] #거리가 기록되어있는 방문 테이블의 value를 반환한다.
+        #상,하,좌,우를 탐색한다.
+        for di,dj in ((-1,0),(1,0),(0,-1),(0,1)):
+            ni,nj = ci+di,cj+dj
+            # ni,nj가 범위이내이고, map이 갈수있는 길 이고, 방문 테이블에서 방문을 하지 않았다면
+            if 0<=ni<N and 0<=nj<M and arr[ni][nj]==1 and v[ni][nj]==0:
+                q.append((ni,nj)) #좌표를 큐에 넣고
+                v[ni][nj] = v[ci][cj]+1 # 거리를 갱신한다.
 
 N,M = map(int,input().split())
 arr = [list(map(int,input())) for _ in range(N)]
-ans = bfs(0,0)
+ans = bfs(0,0,N-1,M-1)
 print(ans)
