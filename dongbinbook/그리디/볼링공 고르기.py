@@ -23,5 +23,6 @@ for combo in combinations(dic.keys(),2):
         continue
     else:
         cnt += 1
+        print(combo)
 
 print(cnt)
