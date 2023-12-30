@@ -9,7 +9,9 @@ tmp = abs(lst[L] + lst[R])
 #정답 처리를 위해서 현재 값의 쌍을 ans 리스트에 저장
 ans = [lst[L], lst[R]]
 
+
 while L < R:
+
     left_val = lst[L]
     right_val = lst[R]
 
@@ -19,7 +21,7 @@ while L < R:
     if abs(sum) < tmp:
         tmp = abs(sum)
         ans = [left_val, right_val] # 정답처리를 위해서 현재보다 작은 값이 있다면 갱신
-        # tmp가 0이면 best case기 때문에 break
+        # tmp가 0이면 best case이기 때문에 break
         if tmp == 0:
             break
 
