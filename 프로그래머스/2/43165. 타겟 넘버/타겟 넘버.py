@@ -4,7 +4,6 @@
 # cur_sum+numbers[cur_idx] -> 이전 까지 연산한 value + 현재 계산할 value + 방향
 # cur_sum-numbers[cur_idx] -> 이전 까지 연산한 value + 현재 계산할 value - 방향
 def dfs(numbers,target,cur_sum,cur_idx):
-
     if cur_idx == len(numbers): # Depth의 끝에 도달하면 len(numbers)와 cur_idx가 같기 때문에 if문 진입
         #타겟넘버가 만들어지는 경우
         if cur_sum == target:
@@ -14,9 +13,8 @@ def dfs(numbers,target,cur_sum,cur_idx):
     else: # 도달하지 못 했다면 else문 진입
         ans = 0  # 경우의 수를 담을 변수
         # 노드를 dfs로 재귀적으로 탐색해서 결과 ans에 더한다.
-        ans += dfs(numbers,target,cur_sum+numbers[cur_idx],cur_idx+1)
-        ans += dfs(numbers,target,cur_sum-numbers[cur_idx],cur_idx+1)
-
+        ans += dfs(numbers,target,cur_sum + numbers[cur_idx],cur_idx+1)
+        ans += dfs(numbers,target,cur_sum - numbers[cur_idx],cur_idx+1)
         return ans
 def solution(numbers,target):
     ans = dfs(numbers,target,0,0)
