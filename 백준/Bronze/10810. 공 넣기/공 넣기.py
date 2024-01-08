@@ -1,10 +1,9 @@
-N, M = map(int, input().split())
-basket = [0] * (N+1)
+N,M = map(int,input().split())
+lst = [0] * (N+1)
 
 for _ in range(M):
-    i, j, k = map(int, input().split())
-    for n in range(i, j+1):
-        basket[n] = k 
+    start , end , num = map(int,input().split())
+    for i in range(start,end+1):
+        lst[i] = num
 
-for i in range(1, N+1):
-    print(basket[i], end = ' ')
+print(*lst[1:])
