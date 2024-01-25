@@ -13,25 +13,27 @@ public class Main {
 
         // 1부터 30까지의 출석번호 중 미제출 학생 찾기
         Arrays.sort(submittedStudents);
-        
-        int firstMissing = -1;
-        int secondMissing = -1;
+
+        int[] missingStudents = findMissingStudents(submittedStudents);
+
+        // 결과 출력
+        System.out.println(missingStudents[0]);
+        System.out.println(missingStudents[1]);
+    }
+
+    // 미제출 학생 찾는 메서드
+    private static int[] findMissingStudents(int[] submittedStudents) {
+        int[] missingStudents = new int[2];
+        int idx = 0;
 
         for (int i = 1, j = 0; i <= 30; i++) {
             if (j < 28 && submittedStudents[j] == i) {
                 j++;
             } else {
-                if (firstMissing == -1) {
-                    firstMissing = i;
-                } else {
-                    secondMissing = i;
-                    break;
-                }
+                missingStudents[idx++] = i;
             }
         }
 
-        // 결과 출력
-        System.out.println(firstMissing);
-        System.out.println(secondMissing);
+        return missingStudents;
     }
 }
