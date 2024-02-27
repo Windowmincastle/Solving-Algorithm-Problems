@@ -19,6 +19,7 @@ def bfs(si, sj, ei, ej):
 
 N, M = map(int, input().split())
 arr = [list(map(int, input())) for _ in range(N)]
-
 ans = bfs(0, 0, N-1, M-1)
 print(ans)
+print('python이 확실히 코테하긴 좋은데..')
+print('하 다시 갈아탈까?')
