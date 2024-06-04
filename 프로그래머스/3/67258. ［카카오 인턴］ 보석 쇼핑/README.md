@@ -1,6 +1,6 @@
 # [level 3] [카카오 인턴] 보석 쇼핑 - 67258 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/67258$) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/67258) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 06월 04일 17:04:16
+2024년 06월 04일 17:04:44
 
 ### 문제 설명
 
