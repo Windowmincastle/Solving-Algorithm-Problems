@@ -6,40 +6,37 @@ import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+
+        // 두 재료의 고유한 번호를 합쳐서 M이 되면 갑옷을 만들 수 있다.
+//        갑옷을 몇 개나 만들 수 있나?
+//        n = 재료의 개수 1 <= n <= 15,000
+//        M = 갑옷을 만드는데 필요한 수 M
+//        배열 N개의 재료들이 가진 고유한 번호들이 공백을 사이에 두고 주어짐.
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int m = Integer.parseInt(br.readLine());
         
-        // 입력 처리
-        int n = Integer.parseInt(br.readLine().trim());
-        int m = Integer.parseInt(br.readLine().trim());
-        
-        int[] materials = new int[n];
+        int[] ary = new int[n];
         StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
-            materials[i] = Integer.parseInt(st.nextToken());
+            ary[i] = Integer.parseInt(st.nextToken());
         }
-        
-        // 재료 번호 정렬
-        Arrays.sort(materials);
-        
-        // 두 포인터 기법을 이용한 갑옷 개수 세기
+
         int answer = 0;
         int start = 0;
-        int end = n - 1;
-        
+        int end = ary.length-1;
+
+        Arrays.sort(ary);
         while (start < end) {
-            int sum = materials[start] + materials[end];
-            if (sum == m) {
+            if (ary[start] + ary[end] > m) {
+                end--;
+            } else if (ary[start] + ary[end] < m) {
+                start++;
+            } else {
                 answer++;
                 start++;
-                end--;
-            } else if (sum < m) {
-                start++;
-            } else { // sum > m
-                end--;
             }
         }
-        
-        // 결과 출력
         System.out.println(answer);
     }
 }
