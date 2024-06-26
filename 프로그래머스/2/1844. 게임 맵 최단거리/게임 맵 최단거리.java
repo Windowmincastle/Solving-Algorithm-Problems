@@ -2,8 +2,8 @@ import java.util.*;
 
 class Solution {
     // 방향 벡터: 오른쪽, 아래, 왼쪽, 위쪽
-    private static final int[] DX = {1, 0, -1, 0};
-    private static final int[] DY = {0, 1, 0, -1};
+    static final int[] DX = {1, 0, -1, 0};
+    static final int[] DY = {0, 1, 0, -1};
     
     public int solution(int[][] maps) {
         // 방문 여부 및 최단 경로 길이를 기록할 배열
