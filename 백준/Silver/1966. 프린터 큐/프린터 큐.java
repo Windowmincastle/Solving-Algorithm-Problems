@@ -1,6 +1,6 @@
+
 import java.io.*;
 import java.util.*;
-
 
 public class Main {
 
@@ -11,54 +11,52 @@ public class Main {
         
         int TC = Integer.parseInt(br.readLine());
         
-        for (int i=0; i<TC; i++){
+        for (int T = 0; T < TC; T++){
 
             String[] input = br.readLine().split(" ");
-            
             int N = Integer.parseInt(input[0]);
             int M = Integer.parseInt(input[1]);
-
-            //문서 중요도 
-            String[] pri = br.readLine().split(" ");
             
+            String[] pri = br.readLine().split(" ");
+
+            //우선순위큐 : 중요도를 기준으로 내림차순 정렬
+            
+            PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->b[1]-a[1]);
+
             Queue<int[]> Q = new LinkedList<>();
             
-            for( int j=0; j<N; j++){
+            for (int i=0; i<N; i++){
                 
-                Q.add(new int[] {j,Integer.parseInt(pri[j])});
+                int priority = Integer.parseInt(pri[i]);
+                
+                Q.add(new int[]{i,priority}); // 큐에 {문서 위치, 중요도}를 넣음
+                pq.add(new int[]{i,priority}); // 우선순위 큐에도 넣음
 
             }
 
-            int cnt = 0; // 출력 순서
+            int cnt = 0;
+
             
             while (!Q.isEmpty()){
                 
-                int[] cur = Q.poll(); // 현재 문서
-                boolean chk = false; // 뒤에 더 중요한 문서가 잇는지 확인
+                int[] cur = Q.poll();
                 
-                for (int[] doc : Q) {
-
-                    if (doc[1] > cur [1]){ // 현재 문서의 중요도보다 높은 중요도를 가진 문서가 있다면
-                        chk = true; // 더 중요한 문서가 잇다고 표시하고 break
-                        break;
-                    }
-                }
-
-                if (chk) { // chk가 true이면 진입
-                    Q.add(cur); // 중요도가 낮으면 뒤로 이동
-                } else {
+                if(cur[1] == pq.peek()[1]){
+                    pq.poll();
                     cnt++;
-                    if (cur[0] == M){
-                        sb.append(cnt).append("\n"); //목표문서 출력
+                    if(cur[0] == M ){
+                        sb.append(cnt).append("\n");
                         break;
                     }
+                } else {
+                    Q.add(cur);
                 }
-
-            }
             
+            }
 
         }
         System.out.print(sb);
-
+        
     }
+    
 }
