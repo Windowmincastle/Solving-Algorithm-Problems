@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.*;
-
 public class Main{
     
     public static void main(String[] args) throws Exception {
@@ -9,11 +8,9 @@ public class Main{
         StringTokenizer st;
         
         int size = 101;
+        boolean map[][] = new boolean[size][size];
         
-        boolean[][] grid = new boolean[size][size];
-        
-        //4개의 직사각형에 대해서 처리하기.
-        for (int i=0; i<4; i++){
+        for(int i=0; i<4; i++){
             
             st = new StringTokenizer(br.readLine());
             
@@ -22,25 +19,24 @@ public class Main{
             int x2 = Integer.parseInt(st.nextToken());
             int y2 = Integer.parseInt(st.nextToken());
             
+            for (int x=x1; x<x2; x++){
+                for(int y=y1; y<y2; y++){
+                    map[x][y] = true;
+                }
+            }
             
-            for (int x= x1; x < x2; x++){
-                for (int y=y1; y<y2; y++){
-                    grid[x][y] = true;
+        }
+        
+        int count = 0;
+        for (int i=0; i<101; i++){
+            for (int j=0; j<101; j++){
+                if (map[i][j]){
+                    count++;
                 }
             }
         }
         
-        int cnt = 0;
-        
-        for(int x=0; x<=100; x++){
-            for(int y=0; y<=100; y++){
-                if (grid[x][y]){
-                    cnt++;
-                }
-            }
-        }
-        
-        System.out.println(cnt);
+        System.out.println(count);
     }
     
 }
