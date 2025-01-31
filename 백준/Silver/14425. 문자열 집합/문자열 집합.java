@@ -2,32 +2,25 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
         
-        // 입력받기
-        String[] input = br.readLine().split(" "); // 공백 기준으로 나누기
-        int n = Integer.parseInt(input[0]); // 첫 번째 숫자
-        int m = Integer.parseInt(input[1]); // 두 번째 숫자
+        int n = Integer.parseInt(st.nextToken()); // 집합 S의 문자열 개수
+        int m = Integer.parseInt(st.nextToken()); // 검사할 문자열 개수
         
-        String[] str = new String[n];
+        // 집합 S를 HashSet으로 저장
+        Set<String> set = new HashSet<>();
         for (int i = 0; i < n; i++) {
-            str[i] = br.readLine();
+            set.add(br.readLine());
         }
         
+        // 검사 문자열을 체크
         int cnt = 0;
-        String[] checkStr = new String[m];
-        for (int j = 0; j < m; j++) {
-            checkStr[j] = br.readLine(); // j 사용
-        }
-        
-        // 비교 로직
-        for (int k = 0; k < m; k++) {
-            for (int l = 0; l < n; l++) {
-                if (checkStr[k].equals(str[l])) {
-                    cnt++;
-                    break; // 중복 확인 방지
-                }
+        for (int i = 0; i < m; i++) {
+            String check = br.readLine();
+            if (set.contains(check)) {
+                cnt++;
             }
         }
         
