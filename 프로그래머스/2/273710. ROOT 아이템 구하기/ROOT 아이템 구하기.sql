@@ -1,0 +1,26 @@
+# -- 코드를 작성해주세요
+# ITEM_INFO 테이블
+# ITEM_ID 아이템 ID
+# ITEM_NAME 아이템명
+# RARITY 아이템의 희귀도
+# PRICE 아이템의 가격
+
+
+
+# ITEM_TREE 테이블
+# ITEM_ID 아이템 ID
+# PARENT_ITEM_ID PARENT 아이템의 ID
+
+# root 아이템을 찾아서 아이템 ID, 아이템명을 출력하는 SQL문을 작성해라 결과는 아이템 ID를 기준으로 오름차순 정렬해라
+
+SELECT
+    INFO.ITEM_ID AS ITEM_ID,
+    INFO.ITEM_NAME AS ITEM_NAME
+FROM
+    ITEM_INFO AS INFO
+LEFT JOIN
+    ITEM_TREE AS TREE
+ON INFO.ITEM_ID = TREE.ITEM_ID
+WHERE TREE.PARENT_ITEM_ID IS NULL
+ORDER BY INFO.ITEM_ID ASC;
+
