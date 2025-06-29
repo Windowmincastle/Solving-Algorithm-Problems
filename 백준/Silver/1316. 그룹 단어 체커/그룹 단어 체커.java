@@ -1,60 +1,42 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.IOException;
 
 public class Main {
-
-//  문제 유형 : 구현
-//  문제 난이도 : 실버 5
-//  문제 풀이 시간 : 1 시간 잡기.
-    public static void main(String[] args) throws Exception {
-
+    public static void main(String[] args) throws IOException {
+        // 빠른 입력을 위한 BufferedReader 사용
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-
         int n = Integer.parseInt(br.readLine()); // 단어 개수
-        int cnt = 0; // 그룹 단어 개수
+        int count = 0; // 그룹 단어 개수
 
         for (int i = 0; i < n; i++) {
-
             String word = br.readLine();
-
             if (isGroupWord(word)) {
-
-                cnt++;
-
+                count++;
             }
-
-
         }
 
-
-        System.out.println(cnt);
+        System.out.println(count);
     }
 
-    public static boolean isGroupWord(String word){
+    public static boolean isGroupWord(String word) {
+        boolean[] visited = new boolean[26]; // 알파벳 등장 여부 저장
+        char prev = 0;
 
-        Set<Character> check = new HashSet<>(); // 등장한 문자를 기록.
+        for (int i = 0; i < word.length(); i++) {
+            char curr = word.charAt(i);
 
-        char prev = '\0'; // 이전 문자 초기화 초기값은 null 문자로 두기.
-
-        for (char current : word.toCharArray()) {
-
-            if (current != prev) { // 현재 문자랑 이전문자가 같지 않다면.
-
-                if (check.contains(current)) { //이미 등장한 문자라면 그룹 단어가 아니다.
-                    return false;
-                } // 체크리스트에 존재하지 않는다면 add하기
-                
-                check.add(current); // 현재 문자 기록
-
+            if (curr != prev) {
+                if (visited[curr - 'a']) {
+                    return false; // 이미 등장했던 문자가 다시 나오면 그룹 단어 아님
+                }
+                visited[curr - 'a'] = true;
+                prev = curr;
             }
-
-            prev = current; // 이전 문자를 갱신.
+            // 같을 경우는 연속된 문자이므로 처리 필요 없음
         }
 
-        return true; // 조건위반이 없으면 그룹단어이므로 true를 반환하기.
+        return true;
     }
-
 }
