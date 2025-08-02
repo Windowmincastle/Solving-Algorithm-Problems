@@ -1,47 +1,46 @@
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        // 입력을 빠르게 받기 위한 BufferedReader
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
 
-        // 배열 크기
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
+        // 1) N, M 읽기
+        String[] parts = br.readLine().split(" ");
+        int n = Integer.parseInt(parts[0]);
+        int m = Integer.parseInt(parts[1]);
 
-        int[][] arr = new int[N + 1][M + 1]; // 1-based index
-        int[][] prefixSum = new int[N + 1][M + 1]; // 누적합 배열
-
-        // 배열 입력 받기
-        for (int i = 1; i <= N; i++) {
-            st = new StringTokenizer(br.readLine());
-            for (int j = 1; j <= M; j++) {
-                arr[i][j] = Integer.parseInt(st.nextToken());
-                // 누적합 계산
-                prefixSum[i][j] = prefixSum[i - 1][j] + prefixSum[i][j - 1]
-                                - prefixSum[i - 1][j - 1] + arr[i][j];
+        // 2) N×M 배열 입력
+        int[][] ary = new int[n][m];
+        for (int i = 0; i < n; i++) {
+            String[] row = br.readLine().split(" ");
+            for (int j = 0; j < m; j++) {
+                ary[i][j] = Integer.parseInt(row[j]);
             }
         }
 
-        // 쿼리 수
-        int K = Integer.parseInt(br.readLine());
-        StringBuilder sb = new StringBuilder();
+        // 3) 질의 개수 K 읽기
+        int k = Integer.parseInt(br.readLine());
 
-        // 쿼리 처리
-        for (int q = 0; q < K; q++) {
-            st = new StringTokenizer(br.readLine());
-            int i = Integer.parseInt(st.nextToken());
-            int j = Integer.parseInt(st.nextToken());
-            int x = Integer.parseInt(st.nextToken());
-            int y = Integer.parseInt(st.nextToken());
+        // 4) K번 동안 (i, j)~(x, y) 합 구해서 sb에 추가
+        for (int q = 0; q < k; q++) {
+            String[] qry = br.readLine().split(" ");
+            int i = Integer.parseInt(qry[0]);
+            int j = Integer.parseInt(qry[1]);
+            int x = Integer.parseInt(qry[2]);
+            int y = Integer.parseInt(qry[3]);
 
-            int sum = prefixSum[x][y] - prefixSum[i - 1][y] - prefixSum[x][j - 1] + prefixSum[i - 1][j - 1];
-            sb.append(sum).append("\n");
+            int sum = 0;
+            for (int r = i - 1; r <= x - 1; r++) {
+                for (int c = j - 1; c <= y - 1; c++) {
+                    sum += ary[r][c];
+                }
+            }
+            sb.append(sum).append('\n');
         }
 
-        // 출력
+        // 5) 결과 출력
         System.out.print(sb);
     }
 }
