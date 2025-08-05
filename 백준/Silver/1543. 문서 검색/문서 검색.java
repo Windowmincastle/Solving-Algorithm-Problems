@@ -1,43 +1,26 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         String document = br.readLine();
         String word     = br.readLine();
 
-        char[] docAry  = document.toCharArray();
-        char[] wordAry = word.toCharArray();
+        int count = 0;
+        int docLen = document.length();
+        int wLen   = word.length();
 
-        int answer = 0;
-        int docLen  = docAry.length;
-        int wLen    = wordAry.length;
-
-        // i 가 마지막 가능한 시작 인덱스까지 검사하도록 <= 로 설정
+        // i 를 직접 조정하는 for 문으로 깔끔하게 처리
         for (int i = 0; i <= docLen - wLen; ) {
-            boolean match = true;
-
-            // word 길이만큼 문자 하나하나 비교
-            for (int j = 0; j < wLen; j++) {
-                if (docAry[i + j] != wordAry[j]) {
-                    match = false;  // 하나라도 불일치하면 중단
-                    break;
-                }
-            }
-
-            if (match) {
-                answer++;
-                // **중복 없이** 세려면, 일치 시 다음 탐색 위치를 단어 길이만큼 건너뛴다
-                i += wLen;
+            if (document.startsWith(word, i)) {
+                count++;
+                i += wLen;           // 일치 시엔 단어 길이만큼 건너뛰기
             } else {
-                // 불일치 시에는 한 칸씩만 이동
-                i++;
+                i++;                 // 불일치 시엔 한 칸 이동
             }
         }
 
-        // main 메서드 내부에서 출력
-        System.out.println(answer);
+        System.out.println(count);
     }
 }
