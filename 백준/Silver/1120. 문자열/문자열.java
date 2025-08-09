@@ -1,34 +1,36 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-        String A = st.nextToken();
-        String B = st.nextToken();
-        int n = A.length();
-        int m = B.length();
-        int minDiff = Integer.MAX_VALUE;
         
-        // A를 B에 맞춰 앞뒤로 패딩한다 생각하고,
-        // B의 길이-n+1 위치만큼 슬라이딩 윈도우 비교
-        for (int offset = 0; offset <= m - n; offset++) {
-            int diff = 0;
-            for (int i = 0; i < n; i++) {
-                if (A.charAt(i) != B.charAt(offset + i)) {
-                    diff++;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        // 두 문자열 A와 B 입력 받기
+        String[] input = br.readLine().split(" ");
+        String A = input[0];
+        String B = input[1];
+
+        int minDiff = Integer.MAX_VALUE; // 차이의 최소값을 저장 (처음엔 아주 큰 값으로 설정)
+
+        // B 안에서 A를 맞출 수 있는 모든 시작 위치 확인
+        // 예: A 길이가 3, B 길이가 5면 시작 위치는 0, 1, 2 총 3개 가능
+        for (int start = 0; start <= B.length() - A.length(); start++) {
+            int diff = 0; // 현재 위치에서의 문자 차이 개수
+
+            // A와 B의 해당 부분 비교
+            for (int i = 0; i < A.length(); i++) {
+                if (A.charAt(i) != B.charAt(start + i)) {
+                    diff++; // 서로 다르면 차이 개수 증가
                 }
             }
-            if (diff < minDiff) {
-                minDiff = diff;
-            }
-            // 최솟값이 0이면 더 이상 줄일 수 없으므로 종료
-            if (minDiff == 0) break;
+
+            // 최소 차이 갱신
+            minDiff = Math.min(minDiff, diff);
         }
-        
+
+        // 결과 출력
         System.out.println(minDiff);
     }
 }
