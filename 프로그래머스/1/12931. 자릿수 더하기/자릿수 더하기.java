@@ -1,19 +1,19 @@
 import java.util.*;
 
 public class Solution {
-    public int solution(int n) {
-        
-        String input = String.valueOf(n);
-        char[] ary = input.toCharArray();
-        int total = 0;
-        
-        for (char a : ary ){
-            
-            total += Character.getNumericValue(a);    
-            
+    static int solution (int n) {
+
+        int sum = 0;
+        while (n > 0){
+            int digit = n % 10;
+            sum += digit;
+            n = n / 10;
         }
-        
-        return total;
-        
+        return sum;
     }
+    
+    public static int main (int n) {
+        return solution(n);
+    }
+    
 }
