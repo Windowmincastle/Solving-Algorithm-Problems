@@ -1,18 +1,14 @@
 class Solution {
     public int solution(int n) {
-        int answer = sol(n);
-        return answer;
-    }
-    
-    public static int sol(int input){
         
-        for(int i=2; i<input; i++){
-            if(input % i == 1){
-                return i;
+        int answer = Integer.MAX_VALUE;
+        for (int x=1000000; x>=2; x--){
+            
+            if (n % x == 1){
+                answer = Math.min(x,answer);
             }
         }
         
-        return -1;
+        return answer;
     }
-    
 }
