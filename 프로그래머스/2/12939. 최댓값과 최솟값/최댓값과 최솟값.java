@@ -1,26 +1,44 @@
-import java.io.*;
-import java.util.*;
-
 class Solution {
-    public String solution(String s) {
+    
+    static int getMaxIntegerValue(String[] input){
         
-        String[] numbers = s.split(" ");
+        int answer = Integer.parseInt(input[0]);
         
-        int min = Integer.MAX_VALUE;
-        int max = Integer.MIN_VALUE;
-        
-        for (String num : numbers){
-            int value = Integer.parseInt(num);
-            if(value < min) {
-                min = value;
-            }
+        for (int i=1; i<input.length; i++){
             
-            if ( value > max){
-                max = value;
+            int temp = Integer.parseInt(input[i]);
+            if ( temp > answer ){
+                answer = temp;
             }
         }
         
-        return min + " " + max;
+        return answer;
+    }
     
+    static int getMinIntegerValue(String[] input){
+        
+        int answer = Integer.parseInt(input[0]);
+        
+        for (int i=1; i<input.length; i++){
+            
+            int temp = Integer.parseInt(input[i]);
+            
+            if ( temp < answer){
+                answer = temp;
+            }
+        }
+        
+        return answer;
+    }
+    
+    public String solution(String s) {
+        
+        String[] input = s.split(" ");
+        
+        String temp = " ";
+        String maxValue = String.valueOf(getMaxIntegerValue(input));
+        String minValue = String.valueOf(getMinIntegerValue(input));
+        String answer = minValue+temp+maxValue;
+        return answer;
     }
 }
