@@ -1,16 +1,15 @@
 class Solution {
     public int solution(int n) {
+        int MOD = 1234567;
+        int[] dp = new int[n + 1];
         
-        int mod = 1234567;
-        int prev1 = 0; // F(0)
-        int prev2 = 1; // F(1)
-
-        for (int i = 2; i<= n; i++){
-            int current = (prev1 + prev2) % mod;
-            prev1 = prev2;
-            prev2 = current;
+        dp[0] = 0;
+        dp[1] = 1;
+        
+        for (int i = 2; i <= n; i++) {
+            dp[i] = (dp[i - 1] + dp[i - 2]) % MOD;
         }
         
-        return prev2;
+        return dp[n];
     }
 }
