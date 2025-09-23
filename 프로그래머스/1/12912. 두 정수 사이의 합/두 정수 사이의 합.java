@@ -1,37 +1,31 @@
 class Solution {
-    public long solution(int a, int b) {
-        
-        long answer = 0;
-        
-        answer = sol(a,b);
-        
-        
-        return answer;
-    }
     
-    public long sol(int a, int b){
+    public static long getStartEndSum(int start, int end){
         
-        if ( a == b ) return a;
+        if( start == end ){
+            return start;
+        }
+        
+        int temp = 0;
+        
+        if (start > end ){
+            temp = start;
+            start = end;
+            end = temp;
+        }
+        
+        
         long sum = 0;
         
-        if (a < b){
-        
-            for (int i=a; i<=b; i++){
-
-                sum += i;
-
-            }
-
-        } else {
-            
-            for (int i=b; i<=a; i++){
-                
-                sum += i;
-            }
-            
+        for (int i=start; i<=end; i++){
+            sum += i;
         }
         
         return sum;
     }
-
+    
+    public long solution(int a, int b) {
+        long answer = getStartEndSum(a,b);
+        return answer;
+    }
 }
