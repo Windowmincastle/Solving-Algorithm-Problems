@@ -1,34 +1,42 @@
 class Solution {
-    boolean solution(String s) {
+    
+    static boolean confirmStr(String s){
         
-        boolean answer = true;
-        
-        String input = s.toLowerCase();
+        boolean sol = false;
         
         int pCnt = 0;
         int yCnt = 0;
         
-        for(int i=0; i<input.length(); i++){
+        s = s.toLowerCase();
+        char[] str = s.toCharArray();
+        
+        for (int i=0; i<str.length; i++){
             
-            char temp = input.charAt(i);
-            
-            if (temp =='p'){
+            if (str[i] == 'p'){
                 pCnt++;
-            } else if ( temp == 'y'){
+            } else if (str[i] == 'y') {
                 yCnt++;
             }
             
+        }        
+        
+        if ( pCnt == 0 && yCnt ==0 ){
+            sol = true;
             
-            if ( pCnt == yCnt ){
-                answer = true;
-            } else if ( pCnt != yCnt){
-                answer = false;
-            } else if ( pCnt == 0 && yCnt == 0){
-                answer = true;
-            }
-            
+            return sol;
         }
-
+        
+        if ( pCnt == yCnt ){
+            sol = true;
+        } else {
+            sol = false;
+        }
+        
+        return sol;
+    }
+    
+    boolean solution(String s) {
+        boolean answer = confirmStr(s);
         return answer;
     }
 }
