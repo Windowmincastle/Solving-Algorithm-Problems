@@ -1,31 +1,34 @@
 import java.util.*;
 
 class Solution {
-    
     public int solution(int k, int[] tangerine) {
-    
-        Map<Integer,Integer> countMap = new HashMap<>();
+        int answer = 0;
         
-        for (int size : tangerine) {
-            countMap.put(size, countMap.getOrDefault(size,0) + 1);
+        Map<Integer,Integer> map = new HashMap<>();
+
+        for (int num : tangerine ){
+            map.put(num,map.getOrDefault(num,0) + 1 );
         }
         
-        List<Integer> counts = new ArrayList<>(countMap.values());
+        List<Integer> counts = new ArrayList<>(map.values());
         counts.sort(Collections.reverseOrder());
         
-        int total = 0;
+        int remaining = k;
         int types = 0;
         
-        for (int count : counts){
-            total += count;
+        for (int count : counts ){
+            
+            remaining -= count;
             types++;
             
-            if (total >= k ){
-                break;
-            }
+            if (remaining <= 0) break;
         }
         
+        answer = types;
         
-        return types;
+        return answer;
+
     }
+
 }
+
