@@ -1,21 +1,24 @@
-import java.util.Arrays;
+import java.util.*;
 
 class Solution {
-    public static boolean solution(String[] phone_book) {
+    public boolean solution(String[] phone_book) {
+        HashMap<String, Integer> map = new HashMap<>();
 
-        // 전화번호 목록을 정렬합니다.
-        Arrays.sort(phone_book);
+        // 모든 번호를 해시에 넣기
+        for (String number : phone_book) {
+            map.put(number, 1);
+        }
 
-        // 정렬된 전화번호 목록에서 인접한 두 번호를 비교합니다.
-        for (int i = 0; i < phone_book.length - 1; i++) {
-            // 현재 번호가 다음 번호의 접두어인지 확인합니다.
-            if (phone_book[i + 1].startsWith(phone_book[i])) {
-                // 접두어 관계가 있으면 false를 반환합니다.
-                return false;
+        // 각 번호의 접두사들이 해시에 존재하는지 확인
+        for (String number : phone_book) {
+            for (int i = 1; i < number.length(); i++) {
+                String prefix = number.substring(0, i);
+                if (map.containsKey(prefix)) {
+                    return false;
+                }
             }
         }
-//
-        // 접두어 관계가 없으면 true를 반환합니다.
+
         return true;
     }
 }
