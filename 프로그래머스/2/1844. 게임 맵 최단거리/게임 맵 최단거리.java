@@ -1,55 +1,51 @@
 import java.util.*;
 
 class Solution {
-    // 좌표 : 상하좌우
-    static final int[] DX = {1, 0, -1, 0};
-    static final int[] DY = {0, 1, 0, -1};
-
-    public int solution(int[][] maps) {
-        // 방문 여부 및 최단 경로 길이를 기록할 배열
-        int[][] distance = new int[maps.length][maps[0].length];
-
-        // BFS를 통해 거리 계산
-        bfs(maps, distance);
-
-        // 목적지에 도달한 경우의 값을 반환
-        int result = distance[maps.length - 1][maps[0].length - 1];
-
-        // 목적지에 도달하지 못한 경우 -1 반환
-        return (result == 0) ? -1 : result;
+    static class Point {
+        int x, y;
+        Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
     }
 
-    private void bfs(int[][] maps, int[][] distance) {
-        int x = 0;
-        int y = 0;
-        distance[x][y] = 1;
+    public int solution(int[][] maps) {
+        int n = maps.length;        // 행 개수
+        int m = maps[0].length;     // 열 개수
 
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{x, y});
+        // 이동 방향 (상, 하, 좌, 우)
+        int[] dx = {-1, 1, 0, 0};
+        int[] dy = {0, 0, -1, 1};
 
-        // 큐가 빌 때까지 반복
+        boolean[][] visited = new boolean[n][m];
+        Queue<Point> queue = new LinkedList<>();
+
+        // 시작점 (0,0)
+        queue.add(new Point(0, 0));
+        visited[0][0] = true;
+
         while (!queue.isEmpty()) {
+            Point now = queue.poll();
 
-            int[] current = queue.remove();
-            int curx = current[0];
-            int cury = current[1];
-
-            // 네 방향으로 탐색
+            // 현재 위치에서 4방향 탐색
             for (int i = 0; i < 4; i++) {
-                int nextX = curx + DX[i];
-                int nextY = cury + DY[i];
+                int nx = now.x + dx[i];
+                int ny = now.y + dy[i];
 
-                // 맵의 경계를 벗어나는지 확인
-                if (nextX < 0 || nextX >= maps.length || nextY < 0 || nextY >= maps[0].length) {
-                    continue;
-                }
+                // 맵 범위 벗어나면 무시
+                if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
 
-                // 방문하지 않았고, 갈 수 있는 길인지 확인
-                if (distance[nextX][nextY] == 0 && maps[nextX][nextY] == 1) {
-                    distance[nextX][nextY] = distance[curx][cury] + 1;
-                    queue.add(new int[]{nextX, nextY});
-                }
+                // 벽이거나 이미 방문한 곳이면 무시
+                if (maps[nx][ny] == 0 || visited[nx][ny]) continue;
+
+                // 이동 가능 → 거리 갱신 + 방문 표시
+                maps[nx][ny] = maps[now.x][now.y] + 1;
+                visited[nx][ny] = true;
+                queue.add(new Point(nx, ny));
             }
         }
+
+        // 도착지에 도달했으면 거리 리턴, 아니면 -1
+        return (maps[n - 1][m - 1] > 1) ? maps[n - 1][m - 1] : -1;
     }
 }
