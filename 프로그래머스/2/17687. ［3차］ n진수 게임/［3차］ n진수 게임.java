@@ -1,33 +1,22 @@
 class Solution {
     public String solution(int n, int t, int m, int p) {
-        StringBuilder seq = new StringBuilder();
-        int num = 0;
-        // 충분한 길이(최소 m*t)가 될 때까지 n진수 문자열을 이어붙인다.
-        while (seq.length() < m * t) {
-            seq.append(toBaseN(num++, n));
+        StringBuilder total = new StringBuilder();
+        StringBuilder answer = new StringBuilder();
+        
+        int num = 0; // 0부터 시작
+        
+        // t개를 얻으려면 m명씩 돌아가므로 충분히 길어야 한다.
+        // 최소 t * m 글자 이상 필요함.
+        while (total.length() < t * m) {
+            // n진수로 변환 후 대문자로
+            total.append(Integer.toString(num++, n).toUpperCase());
         }
         
-        StringBuilder answer = new StringBuilder();
-        // 게임 참가자 수 m 중, 튜브의 순서 p에 해당하는 문자만 골라 t개를 뽑는다.
-        for (int i = 0; i < t; i++) {
-            answer.append(seq.charAt(p - 1 + i * m));
+        // 튜브는 p번째(1-indexed) → 인덱스는 p-1
+        for (int i = p - 1; i < total.length() && answer.length() < t; i += m) {
+            answer.append(total.charAt(i));
         }
+        
         return answer.toString();
-    }
-    
-    // 10진수 num을 n진수 문자열로 변환 (10~15 → 'A'~'F')
-    private String toBaseN(int num, int base) {
-        if (num == 0) return "0";
-        StringBuilder sb = new StringBuilder();
-        while (num > 0) {
-            int rem = num % base;
-            if (rem < 10) {
-                sb.append((char)('0' + rem));
-            } else {
-                sb.append((char)('A' + (rem - 10)));
-            }
-            num /= base;
-        }
-        return sb.reverse().toString();
     }
 }
