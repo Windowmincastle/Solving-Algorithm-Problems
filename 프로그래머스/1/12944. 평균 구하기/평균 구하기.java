@@ -1,20 +1,16 @@
 class Solution {
-    
-    static double getAryAvg(int[] ary){
+    public double solution(int[] arr) {
         
-        int length = ary.length;
-        double sum = 0;
+        double answer = 0;
         
-        for (int i=0; i<length; i++){
-            sum += ary[i];
+        for (int i=0; i<arr.length; i++){
+            
+            answer += arr[i];
+            
         }
         
-        double answer = sum / length ;
+        answer = answer / arr.length;
         
         return answer;
-    }
-    
-    public double solution(int[] arr) {
-        return getAryAvg(arr);
     }
 }
