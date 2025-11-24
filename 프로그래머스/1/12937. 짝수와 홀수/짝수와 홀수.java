@@ -1,18 +1,27 @@
 class Solution {
     
-    static String isEvenAndOdd(int number) {
-
-        String even = "Even";
-        String odd = "Odd";
+    public String OddorEven(int num) {
         
-        if ( number%2 == 0 ) {
-            return even;
-        } else {
-            return odd;
+        String result = "";
+        
+        if ( num == 0) {
+            result = "Even";
+            
+            return result;
         }
+        
+        if ( num % 2 == 0){
+            result = "Even";
+            
+        } else {
+            result = "Odd";
+        }
+        
+        
+        return result;
     }
     
     public String solution(int num) {
-        return isEvenAndOdd(num);
+        return OddorEven(num);
     }
 }
