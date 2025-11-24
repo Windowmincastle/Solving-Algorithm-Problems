@@ -1,19 +1,17 @@
 import java.util.*;
 
 public class Solution {
-    static int solution (int n) {
+    public int solution(int n) {
 
-        int sum = 0;
-        while (n > 0){
-            int digit = n % 10;
-            sum += digit;
-            n = n / 10;
+        int answer = 0;
+        
+        String s = String.valueOf(n);
+        char[] ary = s.toCharArray();
+        
+        for (char c : ary){
+            answer += c - '0';
         }
-        return sum;
+
+        return answer;
     }
-    
-    public static int main (int n) {
-        return solution(n);
-    }
-    
 }
