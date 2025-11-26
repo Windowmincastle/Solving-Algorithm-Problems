@@ -1,27 +1,34 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String input = br.readLine();
 
-        int[] words = new int[26];
-        //입력 문자열에서 알파벳 빈도수 계산
-        for (char c : input.toCharArray()) {
-            words[c - 'a']++;
+        String input = br.readLine().trim();
+        char[] alpa = {'a','b','c','d','e','f','g','h','i',
+                       'j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < alpa.length; i++) {
+            map.put(alpa[i], 0);
         }
-        // 결과 출력
-        StringBuilder result = new StringBuilder();
-        for (int cnt : words) {
-            result.append(cnt).append(" ");
+
+        for (int i = 0; i < input.length(); i++) {
+            char charValue = input.charAt(i);
+            map.put(charValue, map.get(charValue) + 1);
         }
-        System.out.println(result.toString().trim());
+
+        StringBuilder sb = new StringBuilder();
+
+        for (Character c : alpa) {
+            sb.append(map.get(c)).append(" ");
+        }
+
+        System.out.println(sb.toString().trim());
     }
 
 }
