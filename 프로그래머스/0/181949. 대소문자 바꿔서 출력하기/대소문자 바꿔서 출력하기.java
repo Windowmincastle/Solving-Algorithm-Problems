@@ -1,26 +1,40 @@
 import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Solution {
-    public static void main(String[] args) {
+    
+    static void printConvertCase(String inputStr) {
         
-        Scanner sc = new Scanner(System.in);
-        String str = sc.next();
+        int size = inputStr.length();
+        Character[] ctr = new Character[size];
         
-        String answer = "";
+        for (int i=0; i<size; i++){
+            ctr[i] = inputStr.charAt(i);
+        }
         
-        for (int i=0; i<str.length(); i++){
+        for (int j=0; j<ctr.length; j++){
             
-            char check = str.charAt(i);
-            
-            if (Character.isUpperCase(check)){
-                answer += Character.toLowerCase(check);
-            } else if (Character.isLowerCase(check)){
-                answer += Character.toUpperCase(check);
+            if (Character.isUpperCase(ctr[j])){
+                // 대문자면? 소문자로
+                ctr[j] = Character.toLowerCase(ctr[j]);
+            } else {
+                // 소문자인거니까,
+                ctr[j] = Character.toUpperCase(ctr[j]);
             }
             
         }
         
-        System.out.println(answer);
+        String answer = Arrays.stream(ctr)
+                        .map(String::valueOf)
+                        .collect(Collectors.joining());
         
+        System.out.println(answer);
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String a = sc.next();
+        printConvertCase(a);
     }
 }
