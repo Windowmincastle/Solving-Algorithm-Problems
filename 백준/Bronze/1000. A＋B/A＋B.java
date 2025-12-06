@@ -1,14 +1,12 @@
-import java.util.*;
+import java.io.*;
+
 public class Main {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         
-        Scanner scan = new Scanner(System.in);
-        
-        int A = scan.nextInt();
-        int B = scan.nextInt();
-        
-        System.out.println(A+B);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] input = br.readLine().split(" ");
+        System.out.println(Integer.parseInt(input[0]) + Integer.parseInt(input[1]));
         
     }
 }
