@@ -1,38 +1,50 @@
 import java.util.*;
 
 class Solution {
+    
     public int solution(int x, int y, int n) {
         
-        // 방문 여부 체크(중복 탐색 방지)
         boolean[] visited = new boolean[y+1];
         
-        Queue<int[]> q = new LinkedList<>();
-        q.add(new int[]{x,0}); // {현재값, 연산 횟수}
+        // BFS 큐, 현재 값과 연산 횟수를 함께 저장.
+        Queue<int[]> queue = new LinkedList<>();
+        
+        // 시작점 추가: 값 10, 연산횟수 0
+        queue.offer(new int[] {x,0});
         visited[x] = true;
         
-        while(!q.isEmpty()) {
+        while(!queue.isEmpty()) {
             
-            int[] cur = q.poll();
-            int value = cur[0];
-            int cnt = cur[1];
+            int[] current = queue.poll();
+            int value = current[0];
+            int count = current[1];
             
-            if (value == y ) return cnt;
+            if ( value == y ){
+                return count;
+            }
             
-            // 다음 상태 3가지
-            int[] nextValues = {value + n, value * 2, value * 3};
+            int next1 = value + n;
+            int next2 = value * 2;
+            int next3 = value * 3;
             
-            for (int next : nextValues) {
-                
-                // 범위 체크 + 방문 체크
-                if(next <= y && !visited[next]) {
-                    visited[next] = true;
-                    q.add(new int[]{next,cnt+1});
-                }
-                
+            if (next1 <= y && !visited[next1]) {
+                visited[next1] = true;
+                queue.offer(new int[] {next1,count +1});
+            }
+            
+            if (next2 <= y && !visited[next2]) {
+                visited[next2] = true;
+                queue.offer(new int[] {next2,count +1});
+            }
+            
+            if (next3 <= y && !visited[next3]) {
+                visited[next3] = true;
+                queue.offer(new int[] {next3,count +1});
             }
             
         }
         
         return -1;
+
     }
 }
