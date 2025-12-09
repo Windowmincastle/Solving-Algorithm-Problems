@@ -2,44 +2,46 @@ import java.util.*;
 
 class Solution {
     public int[] solution(String msg) {
-        // 1. 초기 사전 생성 (A:1 ... Z:26)
         Map<String, Integer> dict = new HashMap<>();
-        for (int i = 0; i < 26; i++) {
-            dict.put(String.valueOf((char)('A' + i)), i + 1);
+
+        // 1. 사전 초기화 (A~Z → 1~26)
+        int nextIndex = 1;
+        for (char c = 'A'; c <= 'Z'; c++) {
+            dict.put(String.valueOf(c), nextIndex++);
         }
-        int nextIndex = 27; // 다음에 추가될 색인 번호
 
         List<Integer> output = new ArrayList<>();
-        int pos = 0;
-        int n = msg.length();
 
-        // 2. 입력을 순회하면서 가장 긴 w를 찾아 출력하고, w+c를 사전에 등록
-        while (pos < n) {
-            int j = pos + 1;
-            String w = msg.substring(pos, j);
+        int i = 0;
+        while (i < msg.length()) {
+            String w = "" + msg.charAt(i);
+            int j = i + 1;
 
-            // 가능한 한 길게 확장
-            while (j <= n && dict.containsKey(msg.substring(pos, j))) {
-                w = msg.substring(pos, j);
-                j++;
-                if (j > n) break;
+            // 2. w에 다음 문자를 붙여가며 사전에 있는 가장 긴 문자열 찾기
+            while (j <= msg.length()) {
+                String candidate = msg.substring(i, j);
+                if (dict.containsKey(candidate)) {
+                    w = candidate;
+                    j++;
+                } else {
+                    break;
+                }
             }
 
-            // w에 해당하는 색인 출력
+            // 3. 찾은 w의 색인 출력
             output.add(dict.get(w));
 
-            // w 다음에 문자가 있으면 w+c를 사전에 추가
-            if (pos + w.length() < n) {
-                String wc = msg.substring(pos, pos + w.length() + 1);
-                dict.put(wc, nextIndex++);
+            // 4. 가능한 경우에 한해서 w + c 를 사전에 등록
+            if (j <= msg.length()) {
+                String newEntry = msg.substring(i, j);  // w + c
+                dict.put(newEntry, nextIndex++);
             }
 
-            pos += w.length();
+            // 5. 포인터 i 를 처리한 길이만큼 전진
+            i += w.length();
         }
 
-        // 결과를 int[]로 변환하여 반환
-        int[] answer = new int[output.size()];
-        for (int i = 0; i < output.size(); i++) answer[i] = output.get(i);
-        return answer;
+        // 6. List → int[] 변환
+        return output.stream().mapToInt(Integer::intValue).toArray();
     }
 }
