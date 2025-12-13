@@ -2,31 +2,31 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    
     public static void main(String[] args) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
+
         int n = Integer.parseInt(br.readLine());
 
-        Queue<Integer> q = new LinkedList<>();
+        Queue<Integer> q = new ArrayDeque<>();
 
-        for (int i =1; i<=n; i++){
+        // 1부터 n까지 카드 넣기
+        for (int i = 1; i <= n; i++) {
             q.add(i);
         }
 
+        // 카드가 1장 남을 때까지 반복
         while (q.size() > 1) {
-
-            // 맨위 카드를 버림.
+            // 버린 카드 출력
             sb.append(q.poll()).append(" ");
-            //맨 위 카드를 맨 뒤로 이동
+            // 다음 카드를 맨 뒤로 이동
             q.add(q.poll());
-
         }
 
-        sb.append(q.poll()); // 마지막 남은 카드 추가
-        
-        System.out.println(sb);
+        // 마지막 남은 카드 출력
+        sb.append(q.poll());
 
+        System.out.println(sb.toString());
     }
 }
