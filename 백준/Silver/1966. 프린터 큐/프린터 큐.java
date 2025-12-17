@@ -1,62 +1,64 @@
-
 import java.io.*;
 import java.util.*;
 
 public class Main {
 
+    static class Document {
+        int priority;
+        int index;
+
+        Document(int priority, int index) {
+            this.priority = priority;
+            this.index = index;
+        }
+    }
+
     public static void main(String[] args) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        
-        int TC = Integer.parseInt(br.readLine());
-        
-        for (int T = 0; T < TC; T++){
 
-            String[] input = br.readLine().split(" ");
-            int N = Integer.parseInt(input[0]);
-            int M = Integer.parseInt(input[1]);
-            
-            String[] pri = br.readLine().split(" ");
+        int T = Integer.parseInt(br.readLine());
 
-            //우선순위큐 : 중요도를 기준으로 내림차순 정렬
-            
-            PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->b[1]-a[1]);
+        while (T-- > 0) {
 
-            Queue<int[]> Q = new LinkedList<>();
-            
-            for (int i=0; i<N; i++){
-                
-                int priority = Integer.parseInt(pri[i]);
-                
-                Q.add(new int[]{i,priority}); // 큐에 {문서 위치, 중요도}를 넣음
-                pq.add(new int[]{i,priority}); // 우선순위 큐에도 넣음
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int N = Integer.parseInt(st.nextToken());
+            int M = Integer.parseInt(st.nextToken());
 
+            Queue<Document> queue = new LinkedList<>();
+
+            st = new StringTokenizer(br.readLine());
+            for (int i = 0; i < N; i++) {
+                int priority = Integer.parseInt(st.nextToken());
+                queue.offer(new Document(priority, i));
             }
 
-            int cnt = 0;
+            int printOrder = 0;
 
-            
-            while (!Q.isEmpty()){
-                
-                int[] cur = Q.poll();
-                
-                if(cur[1] == pq.peek()[1]){
-                    pq.poll();
-                    cnt++;
-                    if(cur[0] == M ){
-                        sb.append(cnt).append("\n");
+            while (true) {
+                Document current = queue.poll();
+                boolean hasHigherPriority = false;
+
+                for (Document doc : queue) {
+                    if (doc.priority > current.priority) {
+                        hasHigherPriority = true;
                         break;
                     }
-                } else {
-                    Q.add(cur);
                 }
-            
-            }
 
+                if (hasHigherPriority) {
+                    queue.offer(current);
+                } else {
+                    printOrder++;
+                    if (current.index == M) {
+                        sb.append(printOrder).append('\n');
+                        break;
+                    }
+                }
+            }
         }
+
         System.out.print(sb);
-        
     }
-    
 }
