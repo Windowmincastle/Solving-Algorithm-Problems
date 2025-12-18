@@ -1,50 +1,31 @@
 import java.io.*;
-import java.util.*;
 
 public class Main {
-
+    
     public static void main(String[] args) throws Exception {
-
+        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        Map<Character, Integer> words = new HashMap<>();
-        for (int i = 0; i < 26; i++) {
-            char word = (char) ('a' + i);
-            words.put(word, 0);
-        }
-
         String input = br.readLine().toLowerCase();
-        int len = input.length();
-
-        for (int i = 0; i < len; i++) {
-            char currentWord = input.charAt(i);
-            words.put(currentWord, words.get(currentWord) + 1);
-        }
-
-        int maxCount = 0;
-        int eqVal = 0;
-        for (int value : words.values()) {
-            if (value > maxCount) {
-                maxCount = value;
-            }
+        
+        int[] ary = new int[26];
+        
+        // 빈도 계산
+        for (int i = 0; i < input.length(); i++) {
+            ary[input.charAt(i) - 'a']++;
         }
         
-        
+        int max = 0;
         char answer = '?';
-        for (int k=0; k<words.size(); k++){
-            
-            char c =(char)('a'+k);
-            if(words.get(c) == maxCount){
-                answer = (char)(c - 32);
-                eqVal++;
-            }
-            
-        }
         
-        if( eqVal > 1) {
-            System.out.println("?");
-        } else {
-            System.out.println(answer);
+        for (int j = 0; j < 26; j++) {
+            if (ary[j] > max) {
+                max = ary[j];
+                answer = (char)('A' + j);
+            } else if (ary[j] == max && ary[j] != 0) {
+                answer = '?';
+            }
         }
+
+        System.out.println(answer);
     }
 }
