@@ -1,7 +1,6 @@
 class Solution {
     public int solution(String s) {
+        return Integer.parseInt(s);
         
-        int answer = Integer.parseInt(s);
-        return answer;
     }
 }
