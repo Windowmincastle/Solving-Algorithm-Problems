@@ -2,16 +2,22 @@ import java.io.*;
 import java.util.*;
 
 class Solution {
-
-    
-    public int[] solution(long n) {
+    public long[] solution(long n) {
         
-        String temp = String.valueOf(n);
-        String target = new StringBuilder(temp).reverse().toString();
+        int len = String.valueOf(n).length();
+        StringBuilder sb = new StringBuilder(String.valueOf(n));
+        sb.reverse();
         
-        int[] answer = new int[target.length()];
-        for (int i=0; i<target.length(); i++){
-            answer[i] = target.charAt(i) - '0';
+        String sbToString = sb.toString();
+        
+        long temp = Long.parseLong(sbToString);
+        
+        long[] answer = new long[len];
+        
+        // 5 4 3 2 1
+        for (int i=answer.length-1; i>=0; i--) {
+            answer[i] = temp % 10;
+            temp = temp / 10;
         }
         
         return answer;
