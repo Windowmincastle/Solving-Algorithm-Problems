@@ -2,59 +2,66 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
+
+    static int M, N, K;
+    static int[][] field;
+    static boolean[][] visited;
+
+    // 상, 하, 좌, 우 이동
+    static int[] dx = {1, -1, 0, 0};
+    static int[] dy = {0, 0, 1, -1};
+
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
         StringBuilder sb = new StringBuilder();
 
-        int T = Integer.parseInt(br.readLine().trim());
-        int[] dr = {-1, 1, 0, 0};
-        int[] dc = {0, 0, -1, 1};
+        int T = Integer.parseInt(br.readLine());
 
         while (T-- > 0) {
-            st = new StringTokenizer(br.readLine());
-            int M = Integer.parseInt(st.nextToken()); // 가로 길이 (x)
-            int N = Integer.parseInt(st.nextToken()); // 세로 길이 (y)
-            int K = Integer.parseInt(st.nextToken()); // 배추 개수
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            M = Integer.parseInt(st.nextToken());
+            N = Integer.parseInt(st.nextToken());
+            K = Integer.parseInt(st.nextToken());
 
-            boolean[][] map = new boolean[N][M]; // map[row(y)][col(x)]
+            field = new int[M][N];
+            visited = new boolean[M][N];
 
             for (int i = 0; i < K; i++) {
                 st = new StringTokenizer(br.readLine());
                 int x = Integer.parseInt(st.nextToken());
                 int y = Integer.parseInt(st.nextToken());
-                map[y][x] = true;
+                field[x][y] = 1;
             }
 
-            int worms = 0;
-            for (int r = 0; r < N; r++) {
-                for (int c = 0; c < M; c++) {
-                    if (map[r][c]) {
-                        worms++;
-                        // BFS로 연결된 배추들 방문 처리
-                        Queue<int[]> q = new LinkedList<>();
-                        q.offer(new int[]{r, c});
-                        map[r][c] = false;
+            int count = 0;
 
-                        while (!q.isEmpty()) {
-                            int[] cur = q.poll();
-                            int cr = cur[0], cc = cur[1];
-                            for (int d = 0; d < 4; d++) {
-                                int nr = cr + dr[d];
-                                int nc = cc + dc[d];
-                                if (nr >= 0 && nr < N && nc >= 0 && nc < M && map[nr][nc]) {
-                                    map[nr][nc] = false;
-                                    q.offer(new int[]{nr, nc});
-                                }
-                            }
-                        }
+            for (int i = 0; i < M; i++) {
+                for (int j = 0; j < N; j++) {
+                    if (field[i][j] == 1 && !visited[i][j]) {
+                        dfs(i, j);
+                        count++;
                     }
                 }
             }
 
-            sb.append(worms).append('\n');
+            sb.append(count).append('\n');
         }
 
-        System.out.print(sb.toString());
+        System.out.print(sb);
+    }
+
+    static void dfs(int x, int y) {
+        visited[x][y] = true;
+
+        for (int d = 0; d < 4; d++) {
+            int nx = x + dx[d];
+            int ny = y + dy[d];
+
+            if (nx >= 0 && ny >= 0 && nx < M && ny < N) {
+                if (field[nx][ny] == 1 && !visited[nx][ny]) {
+                    dfs(nx, ny);
+                }
+            }
+        }
     }
 }
