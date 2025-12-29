@@ -1,14 +1,13 @@
 class Solution {
     public String solution(String s) {
-        String ans = "";
-        
-        if (s.length() % 2 == 0) {
-            ans = s.substring(s.length() / 2 - 1, s.length() / 2 + 1);
+    
+        int a = s.length() / 2;
+        if ( s.length() % 2 == 0 ) {
+            s = s.substring(a-1, a+1);
         } else {
-            ans = s.substring(s.length() / 2, s.length() / 2 + 1);
+            s = String.valueOf(s.charAt(a));
         }
         
-        return ans;
-    
+        return s;
     }
 }
