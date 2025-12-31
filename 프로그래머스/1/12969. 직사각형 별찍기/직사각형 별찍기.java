@@ -1,18 +1,24 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 class Solution {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int m = sc.nextInt();
+    public static void main(String[] args) throws Exception {
         
-        for (int i=0; i<m; i++){
-            
-            for (int j=0; j<n; j++){
-                System.out.print("*");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        String[] input = br.readLine().split(" ");
+        int row = Integer.parseInt(input[0]);
+        int col = Integer.parseInt(input[1]);
+        StringBuilder sb = new StringBuilder();
+        
+        for (int i=0; i<col; i++) {
+            for (int j=0; j<row; j++) {
+                sb.append("*");
             }
-            System.out.println();
+            sb.append("\n");
         }
         
+
+        System.out.println(sb.toString());
     }
 }
