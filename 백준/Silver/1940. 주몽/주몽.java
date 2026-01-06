@@ -1,42 +1,49 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
 
-        // 두 재료의 고유한 번호를 합쳐서 M이 되면 갑옷을 만들 수 있다.
-//        갑옷을 몇 개나 만들 수 있나?
-//        n = 재료의 개수 1 <= n <= 15,000
-//        M = 갑옷을 만드는데 필요한 수 M
-//        배열 N개의 재료들이 가진 고유한 번호들이 공백을 사이에 두고 주어짐.
+    public static void main(String[] args) throws Exception {
+        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
         int n = Integer.parseInt(br.readLine());
-        int m = Integer.parseInt(br.readLine());
+        int targetValue = Integer.parseInt(br.readLine());
         
         int[] ary = new int[n];
         StringTokenizer st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < n; i++) {
+        for (int i=0; i<n; i++) {
             ary[i] = Integer.parseInt(st.nextToken());
         }
-
-        int answer = 0;
-        int start = 0;
-        int end = ary.length-1;
-
+        
         Arrays.sort(ary);
-        while (start < end) {
-            if (ary[start] + ary[end] > m) {
-                end--;
-            } else if (ary[start] + ary[end] < m) {
-                start++;
-            } else {
+        
+        int answer = 0;
+        int left = 0;
+        int right = n-1;
+        
+        while (left < right) {
+            
+            int sum = ary[left] + ary[right];
+            
+            // sum이 targetValue보다 크다 그럼 어쨰야겟어? 정렬을 했으니까, left의 포인터 위치를 이동을
+            // 해야겟지? 정렬을 했으니 큰값을 담당하는 right의 포인터 위치를 옮겨야겠지.
+            if ( sum > targetValue ) {
+                right--;
+            // sum이 타겟 값 보다 작다면, 더 큰값들을 합쳐서 비교해봐야겟지, 이미 right는 큰값으로 잡혀있으니
+            // left를 이동시켜서 더 큰값으로 만들어야한다.
+            } else if (sum < targetValue) {
+                left++;
+            } else if ( sum == targetValue ) {
+                //정답 조합이기 때문에 answer ++하고
+                //양쪽 다 한칸씩 좁혀준다.
                 answer++;
-                start++;
+                left++;
+                right--;
             }
+            
         }
         System.out.println(answer);
-    }
+        
+    } 
 }
