@@ -1,59 +1,60 @@
 import java.io.*;
-import java.util.*;
 
 public class Main {
-    
     public static void main(String[] args) throws Exception {
         
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int TestCase = Integer.parseInt(br.readLine());
         
-        int T = Integer.parseInt(br.readLine());
         
-        // 각 테스트 케이스에 대해서 거북이가 이동한 영역을 모두 포함하는 가장 작은 직사각형
-        int answer = 0;
-        
-        // 방향 이동 벡터
-        // 0 : 북 , 1: 동, 2: 남, 3: 서
-        int[] dx = {0, 1, 0, -1};
+        // 0 1 2 3 , 북 동 남 서
+        int[] dx = {0, 1,  0, -1};
         int[] dy = {1, 0, -1, 0};
         
-        // 테스트케이스 수 만큼 반복.
-        for (int t=0; t<T; t++) {
+        while (TestCase > 0) {
             
-            char[] commands = br.readLine().toCharArray();
+            // 기저조건
+            TestCase--;
             
-            int x = 0, y = 0;
-            int minX = 0, maxX = 0;
-            int minY = 0, maxY = 0;
+            char[] coms = br.readLine().toCharArray();
+            int maxX = 0, minX = 0;
+            int maxY = 0, minY = 0;
             
-            int currentX = 0;
-            int currentY = 0;
-            // 시작은 북쪽 
-            int dir = 0;
+            int curX = 0, curY = 0; // 현재 좌표 , 항상 0,0에서 시작
+            int dir = 0; // 방향
             
-            for (char cmd : commands) {
-                
-                if ( cmd == 'L') {
-                    dir = (dir + 3) % 4;
-                } else if ( cmd == 'R') {
+            for (char com : coms) {
+            
+                //방향 변환만할때와, 이동할떄를 구분해야함.
+                if ( com == 'F') {
+                    //한 눈금 앞으로니까,현재 d와 좌표에서 이동하면되겟지?
+                    curX += dx[dir];
+                    curY += dy[dir];
+                } else if ( com == 'B') {
+                    // 한 눈금 뒤로니까, 현재 d와 좌표에서 한 눈금 뒤로 이동.
+                    curX -= dx[dir];
+                    curY -= dy[dir];
+                } else if ( com == 'R') {
+                    // 오른쪽으로 방향만 돌린다. 즉 동쪽으로 돌리는거지
                     dir = (dir + 1) % 4;
-                } else if ( cmd == 'F') {
-                    x += dx[dir];
-                    y += dy[dir];
-                } else if ( cmd == 'B') {
-                    x -= dx[dir];
-                    y -= dy[dir];
+                } else if ( com == 'L') {
+                    // 왼쪽으로 방향만 돌린다. 즉 서쪽으로 돌리는거지
+                    dir = (dir + 3) % 4;
                 }
                 
-                if ( cmd == 'F' || cmd =='B') {
-                    minX = Math.min(minX, x);
-                    maxX = Math.max(maxX, x);
-                    minY = Math.min(minY, y);
-                    maxY = Math.max(maxY, y);
+                // 그리고 F나 B일때 최대,최소값들을 갱신해줘야함.
+                
+                if ( com == 'F' || com == 'B') {
+                    
+                    maxX = Math.max(maxX, curX);
+                    minX = Math.min(minX, curX);
+                    maxY = Math.max(maxY, curY);
+                    minY = Math.min(minY, curY);
                 }
                 
+
             }
-            
+            // 직사각형 넓이 계산 밑변 x 높이
             int area = (maxX - minX) * (maxY - minY);
             System.out.println(area);
         }
