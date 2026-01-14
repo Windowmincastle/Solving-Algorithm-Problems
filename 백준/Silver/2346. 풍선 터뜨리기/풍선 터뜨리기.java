@@ -1,76 +1,52 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    
-    // 풍선 정보를 저장할 클래스 정의
-    static class Balloon {
-        int index;  // 풍선의 번호
-        int value;  // 풍선 안에 적힌 값
-        
-        public Balloon(int index, int value) {
-            this.index = index;
-            this.value = value;
-        }
-    }
-    
-    public static void main(String[] args) throws IOException {
-        // BufferedReader를 사용하여 입력 처리
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
-        // 풍선의 개수 N 입력 받기
-        int N = Integer.parseInt(br.readLine());
+        int n = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine()); // split보다 효율적인 방식
         
-        // 풍선 안에 적힌 값들 입력 받기
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        
-        // 풍선 정보를 저장할 덱 생성
-        Deque<Balloon> balloons = new ArrayDeque<>();
-        
-        // 각 풍선의 번호와 값을 덱에 저장
-        for (int i = 1; i <= N; i++) {
-            int value = Integer.parseInt(st.nextToken());
-            balloons.add(new Balloon(i, value));
+        int[] moves = new int[n];
+        for (int i = 0; i < n; i++) {
+            moves[i] = Integer.parseInt(st.nextToken());
         }
         
-        // 결과를 저장할 StringBuilder 생성
+        Deque<int[]> dq = new ArrayDeque<>();
+        
+        // 덱에 {풍선번호, 적힌값} 추가
+        for (int i = 1; i <= n; i++) {
+            dq.add(new int[]{i, moves[i-1]});
+        }
+        
         StringBuilder sb = new StringBuilder();
         
-        // 첫 번째 풍선 처리
-        Balloon current = balloons.pollFirst();  // 첫 번째 풍선 꺼내기
-        sb.append(current.index).append(" ");    // 결과에 풍선 번호 추가
-        
-        // 모든 풍선이 터질 때까지 반복
-        while (!balloons.isEmpty()) {
-            int move = current.value;  // 현재 풍선에 적힌 값
+        while(!dq.isEmpty()) {
+            // 1. 현재 풍선을 터뜨림
+            int[] current = dq.pollFirst();
+            int pNum = current[0];
+            int move = current[1];
             
+            sb.append(pNum).append(" ");
+            
+            // 덱이 비었으면 종료
+            if (dq.isEmpty()) break;
+            
+            // 2. 이동 로직
             if (move > 0) {
-                // 양수인 경우 오른쪽으로 이동
+                // 양수일 때: (move - 1)번 앞에서 빼서 뒤로
                 for (int i = 0; i < move - 1; i++) {
-                    // 덱의 앞에서 꺼내서 뒤로 넣기 (오른쪽으로 이동)
-                    balloons.addLast(balloons.pollFirst());
+                    dq.addLast(dq.pollFirst());
                 }
-                // 다음 터뜨릴 풍선
-                current = balloons.pollFirst();
             } else {
-                // 음수인 경우 왼쪽으로 이동
+                // 음수일 때: (절댓값)번 뒤에서 빼서 앞으로
                 for (int i = 0; i < Math.abs(move); i++) {
-                    // 덱의 뒤에서 꺼내서 앞으로 넣기 (왼쪽으로 이동)
-                    balloons.addFirst(balloons.pollLast());
+                    dq.addFirst(dq.pollLast());
                 }
-                // 다음 터뜨릴 풍선
-                current = balloons.pollFirst();
             }
-            
-            // 결과에 풍선 번호 추가
-            sb.append(current.index).append(" ");
         }
-        
-        // 결과 출력
-        System.out.println(sb);
+        // 최종 결과 한 번에 출력
+        System.out.println(sb.toString().trim());
     }
 }
