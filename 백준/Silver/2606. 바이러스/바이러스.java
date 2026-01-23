@@ -1,54 +1,47 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main {
-    
-    // 연결된 리스트를 표현
-    static List<List<Integer>> adj = new ArrayList<>();
-    // 방문 체크,       
+    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
     static boolean[] visited;
     static int count = 0;
-    
-    static void dfs(int nodeNum) {
-        
-        if (visited[nodeNum] ) return; // 방문했어? 돌아가
-        visited[nodeNum] = true; // 방문 안했어? 방문 처리해
-        count++; // 방문했으니 횟수 올려
-        
-        for (Integer num : adj.get(nodeNum)) {
-               dfs(num);
-        }
-    }
-    
-    public static void main (String[] args) throws Exception {
-        
+
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int compNum = Integer.parseInt(br.readLine());
-        visited = new boolean[compNum+1];
         
-        // compNum+1 개의 노드를 만들고 0번 인덱스를 사용하지 않겟음.
-        for (int i=0; i<=compNum; i++) {
-            adj.add(new ArrayList<>());
+        int N = Integer.parseInt(br.readLine());
+        int E = Integer.parseInt(br.readLine());
+        
+        visited = new boolean[N + 1];
+        
+        for (int i = 0; i <= N; i++) {
+            graph.add(new ArrayList<>());
         }
         
-        // 간선 정보 입력
-        int link = Integer.parseInt(br.readLine());
-        
-        for (int j=0; j<link; j++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < E; i++) {
+            String[] edge = br.readLine().split(" ");
+            int u = Integer.parseInt(edge[0]);
+            int v = Integer.parseInt(edge[1]);
             
-            int Node  = Integer.parseInt(st.nextToken());
-            int Child = Integer.parseInt(st.nextToken());
-            
-            adj.get(Node).add(Child);
-            adj.get(Child).add(Node);
-            
+            graph.get(u).add(v);
+            graph.get(v).add(u);
         }
         
-        // 1번 컴퓨터가 웜 바이러스에 걸림.
         dfs(1);
         
-        System.out.print(count-1);
+        System.out.println(count - 1); // 1번 컴퓨터를 제외한 감염된 컴퓨터의 수
     }
-    
+
+    public static void dfs(int node) {
+        visited[node] = true;
+        count++;
+        
+        for (int neighbor : graph.get(node)) {
+            if (!visited[neighbor]) {
+                dfs(neighbor);
+            }
+        }
+    }
 }
