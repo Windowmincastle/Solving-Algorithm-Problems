@@ -1,30 +1,36 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        // N, M 입력
         StringTokenizer st = new StringTokenizer(br.readLine());
-        
-        int n = Integer.parseInt(st.nextToken()); // 집합 S의 문자열 개수
-        int m = Integer.parseInt(st.nextToken()); // 검사할 문자열 개수
-        
-        // 집합 S를 HashSet으로 저장
-        Set<String> set = new HashSet<>();
-        for (int i = 0; i < n; i++) {
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        // 집합 S
+        HashSet<String> set = new HashSet<>();
+
+        // N개의 문자열 저장
+        for (int i = 0; i < N; i++) {
             set.add(br.readLine());
         }
-        
-        // 검사 문자열을 체크
-        int cnt = 0;
-        for (int i = 0; i < m; i++) {
-            String check = br.readLine();
-            if (set.contains(check)) {
-                cnt++;
+
+        // 검사 문자열
+        int count = 0;
+        for (int i = 0; i < M; i++) {
+            String target = br.readLine();
+            if (set.contains(target)) {
+                count++;
             }
         }
-        
+
         // 결과 출력
-        System.out.println(cnt);
+        System.out.println(count);
     }
 }
