@@ -1,45 +1,46 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.io.*;
+import java.util.*;
 
 public class Main {
+    
     public static void main(String[] args) throws Exception {
+        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
-
-        int N = Integer.parseInt(br.readLine());
-        Deque<Integer> stack = new ArrayDeque<>();
-
-        for (int i = 0; i < N; i++) {
-            String command = br.readLine();
-
-            if (command.startsWith("push")) {
-                int x = Integer.parseInt(command.split(" ")[1]);
-                stack.push(x);
-
-            } else if (command.equals("pop")) {
-                if (stack.isEmpty()) {
-                    sb.append(-1).append('\n');
+        Deque<Integer> dq = new ArrayDeque<>();
+        
+        int n = Integer.parseInt(br.readLine());
+        
+        for (int i=0; i<n; i++) {
+            
+            
+            String[] actions = br.readLine().split(" ");
+            String com = actions[0];
+            
+            if (com.equals("push")) {
+                String value = actions[1];
+                dq.offerFirst(Integer.parseInt(value));
+            } else if (com.equals("pop")) {
+                if (!dq.isEmpty()) {
+                    System.out.println(dq.pollFirst());
                 } else {
-                    sb.append(stack.pop()).append('\n');
+                    System.out.println("-1");
                 }
-
-            } else if (command.equals("size")) {
-                sb.append(stack.size()).append('\n');
-
-            } else if (command.equals("empty")) {
-                sb.append(stack.isEmpty() ? 1 : 0).append('\n');
-
-            } else if (command.equals("top")) {
-                if (stack.isEmpty()) {
-                    sb.append(-1).append('\n');
+            } else if (com.equals("size")) {
+                System.out.println(dq.size());
+            } else if (com.equals("empty")) {
+                
+                if(dq.isEmpty()) {
+                    System.out.println("1");
                 } else {
-                    sb.append(stack.peek()).append('\n');
+                    System.out.println("0");
+                }
+            } else if (com.equals("top")) {
+                if(!dq.isEmpty()) {
+                    System.out.println(dq.peekFirst());
+                } else {
+                    System.out.println("-1");
                 }
             }
         }
-
-        System.out.print(sb.toString());
     }
 }
