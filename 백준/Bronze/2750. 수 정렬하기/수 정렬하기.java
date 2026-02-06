@@ -6,20 +6,23 @@ public class Main {
     public static void main(String[] args) throws Exception {
         
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
+        
         int n = Integer.parseInt(br.readLine());
-        List<Integer> list = new ArrayList<>();
+        int[] ary = new int[n];
         
-        for (int i = 0; i < n; i++) {
-            list.add(Integer.parseInt(br.readLine()));
+        for (int i=0; i<n; i++) {
+            ary[i] = Integer.parseInt(br.readLine());
         }
         
-        Collections.sort(list);
+        Arrays.sort(ary);
         
-        for (int num : list) {
-            sb.append(num).append("\n");
+        StringBuilder sb = new StringBuilder();
+        
+        for (int i=0; i<n; i++) {
+            sb.append(ary[i]).append("\n");
         }
         
-        System.out.println(sb);
+        System.out.println(sb.toString());
+
     }
 }
