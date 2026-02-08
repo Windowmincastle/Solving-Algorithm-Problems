@@ -1,31 +1,33 @@
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String expression = sc.nextLine();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String expression = br.readLine();
 
-        // '-' 기호를 기준으로 분리
+        // '-' 기준으로 분리
         String[] minusSplit = expression.split("-");
 
-        // 첫 번째 그룹은 그냥 더함
-        int result = sumOfExpression(minusSplit[0]);
+        int result = 0;
 
-        // 나머지는 괄호로 묶어서 뺌
+        // 첫 번째 덩어리는 그대로 더함
+        String[] first = minusSplit[0].split("\\+");
+        for (String num : first) {
+            result += Integer.parseInt(num);
+        }
+
+        // 두 번째 덩어리부터는 전부 빼기
         for (int i = 1; i < minusSplit.length; i++) {
-            result -= sumOfExpression(minusSplit[i]);
+            String[] plusSplit = minusSplit[i].split("\\+");
+            int sum = 0;
+            for (String num : plusSplit) {
+                sum += Integer.parseInt(num);
+            }
+            result -= sum;
         }
 
         System.out.println(result);
-    }
-
-    // "50+40" 같은 문자열을 파싱해서 숫자 합계를 리턴
-    private static int sumOfExpression(String expr) {
-        String[] plusSplit = expr.split("\\+");
-        int sum = 0;
-        for (String num : plusSplit) {
-            sum += Integer.parseInt(num);
-        }
-        return sum;
     }
 }
