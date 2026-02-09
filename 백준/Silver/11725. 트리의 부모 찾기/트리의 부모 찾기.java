@@ -3,69 +3,62 @@ import java.util.*;
 
 public class Main {
     
-    // ROOT 상수값
-    static int ROOT = 1;
-    // x번 노드의 부모가 누군지 기록할 배열
-    static int[] parent;
-    // x번 노드를 방문했는지 체크할 배열
+    static List<List<Integer>> adj = new ArrayList<>();
     static boolean[] visited;
-    // 트리를 표현할 인접리스트
-    static List<List<Integer>> adj;
+    static int[] parentAry; 
     
-    public static void dfs(int cur) {
+    static void dfs(int node) {
         
-        visited[cur] = true;
-        
-        for (int nextNode : adj.get(cur)) {
+        // n번 노드로 들어왔다. 방문 처리를 해야지,
+        visited[node] = true;
+        // 반복문을 돌면서 n번 노드에 연결된 모든 노드에 방문해야함.
+        for (int next : adj.get(node)) {
             
-            if(!visited[nextNode]) {
-                // 그럼 내 자식이니까
-                parent[nextNode] = cur; // 저장
-                // 자식 집으로 가봐야 손주가 누군지 알수있다.
-                dfs(nextNode);
+            // 만약에 방문 안 했으면 방문해야지, 다른 조건이 또 잇나..
+            if( visited[next] == false ) {
+                // 부모 배열에 등록하고, 방문을한 node가 next의 부모임.
+                parentAry[next] = node;
+                dfs(next);
             }
         }
+        
     }
     
     public static void main(String[] args) throws Exception {
         
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
         int n = Integer.parseInt(br.readLine());
         
-        // 노드를 n-1개 만들어준다.
-        adj = new ArrayList<>();
-        for (int i=0; i<=n; i++) {
-            // < 비교연산자라서 0-1-2-3-4-5-6까지니까 노드는 n-1개 생성
+        // 1-based 인덱스 체크를 하기위해서 +1
+        visited = new boolean[n+1];
+        parentAry = new int[n+1];
+        
+        // 노드를 만들어야지 +1 해서
+        for (int i=0; i<n+1; i++) {
             adj.add(new ArrayList<>());
         }
         
-        //부모 배열 초기화, 왜 n+1개인지 이해가 좀 안됌 0번 idx는 안쓰려고 그런가? 
-        parent  = new int[n+1];
-        visited = new boolean[n+1];
         
-        // 인접리스트에 그래프 저장 (양방향으로 넣기)
+        // 노드 입력 받기. 양방향으로 삽입.
         for (int i=0; i<n-1; i++) {
-            
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
+
+            int node1 = Integer.parseInt(st.nextToken());
+            int node2 = Integer.parseInt(st.nextToken());
             
-            adj.get(a).add(b);
-            adj.get(b).add(a);
-            
+            adj.get(node1).add(node2);
+            adj.get(node2).add(node1);
         }
         
-        //dfs 호출 root부터
-        dfs(ROOT);
+        dfs(1);
         
         StringBuilder sb = new StringBuilder();
-        for (int i=2; i<=n; i++) {
-            //문제에서 2번 노드부터 순서대로 출력하라고햇음.
-            sb.append(parent[i]).append("\n");
-        }
         
-        System.out.print(sb);        
+for (int i = 2; i <= n; i++) {
+    sb.append(parentAry[i]).append("\n");
+}
+        
+        System.out.println(sb.toString());
     }
-    
-    
 }
