@@ -1,47 +1,25 @@
 import java.io.*;
 import java.util.*;
 
-public class Main{
-    
+public class Main {
     public static void main(String[] args) throws Exception {
-        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
-        
-        int n = Integer.parseInt(br.readLine());
-        int[] tallerCnt = new int[n];
-        int[] answer = new int[n];
-        
+        int N = Integer.parseInt(br.readLine().trim());
         StringTokenizer st = new StringTokenizer(br.readLine());
-        
-        for(int i=0; i<n; i++){
-            tallerCnt[i] = Integer.parseInt(st.nextToken());
+        int[] a = new int[N+1]; // 1..N 사용
+        for (int i = 1; i <= N; i++) {
+            a[i] = Integer.parseInt(st.nextToken());
         }
-        
-        for(int i=0; i<n; i++){
-            
-            int cnt = tallerCnt[i];
-            
-            for (int j=0; j<n; j++){
-                
-                if( cnt==0 && answer[j]==0){
-                    answer[j] = i+1;
-                    break;
-                }
-                
-                if(answer[j] == 0){
-                    cnt--;
-                }
-                
-            }
-            
+
+        List<Integer> line = new ArrayList<>();
+        for (int h = N; h >= 1; h--) {
+            line.add(a[h], h); // 인덱스 a[h] 에 키 h 삽입
         }
-        
-        for( int ans : answer ){
-            sb.append(ans).append(" ");
+
+        StringBuilder sb = new StringBuilder();
+        for (int x : line) {
+            sb.append(x).append(' ');
         }
-        System.out.println(sb);
-        
+        System.out.println(sb.toString().trim());
     }
-    
 }
