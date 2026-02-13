@@ -1,39 +1,41 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-
-
-    public static void main(String[] args) throws IOException {
-
+    
+    public static void main(String[] args) throws Exception {
+        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         String[] input = br.readLine().split(" ");
+        
         int n = Integer.parseInt(input[0]);
         int k = Integer.parseInt(input[1]);
-
-        Integer[] coins = new Integer[n];
-        for (int i = 0; i < coins.length; i++) {
-            coins[i] = Integer.parseInt(br.readLine());
+        int coinCnt = 0;
+        
+        List<Integer> coinLst = new ArrayList<>();
+        
+        for (int i=0; i<n; i++) {
+            coinLst.add(Integer.parseInt(br.readLine()));
         }
-
-        Arrays.sort(coins, Collections.reverseOrder());
-
-        int count = 0;
-        for (int coin : coins) {
-
-            if (k == 0) {
-                break;
+        
+        // Comparator 람다식으로 내람차순 정렬
+        coinLst.sort((o1,o2)->o2-o1);
+        
+        while(k >= 0) {
+            
+            if (k == 0) break;
+            
+            for (int coin : coinLst) {
+                
+                if ( coin <= k ) {
+                    coinCnt += k / coin;
+                    k = k % coin;
+                    break;
+                }
             }
-
-            count += k/coin;
-            k %= coin;
-
         }
-        System.out.println(count);
+        
+        System.out.println(coinCnt);
     }
+    
 }
