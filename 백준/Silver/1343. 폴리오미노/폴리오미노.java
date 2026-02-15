@@ -1,20 +1,51 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String board = sc.nextLine();
 
-        // XXXX를 AAAA로 치환
-        board = board.replace("XXXX", "AAAA");
-        // XX를 BB로 치환
-        board = board.replace("XX", "BB");
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String board = br.readLine();
 
-        // X가 남아있으면 -1 출력, 아니면 결과 출력
-        if (board.contains("X")) {
-            System.out.println("-1");
-        } else {
-            System.out.println(board);
+        StringBuilder result = new StringBuilder();
+        int n = board.length();
+        int i = 0;
+
+        while (i < n) {
+
+            // '.'이면 그대로 추가
+            if (board.charAt(i) == '.') {
+                result.append('.');
+                i++;
+                continue;
+            }
+
+            // 연속된 X의 개수 세기
+            int count = 0;
+            while (i < n && board.charAt(i) == 'X') {
+                count++;
+                i++;
+            }
+
+            // 홀수이면 덮을 수 없음
+            if (count % 2 != 0) {
+                System.out.println(-1);
+                return;
+            }
+
+            // AAAA 최대한 채우기
+            while (count >= 4) {
+                result.append("AAAA");
+                count -= 4;
+            }
+
+            // 남은 2칸은 BB
+            if (count == 2) {
+                result.append("BB");
+            }
         }
+
+        System.out.println(result);
     }
 }
