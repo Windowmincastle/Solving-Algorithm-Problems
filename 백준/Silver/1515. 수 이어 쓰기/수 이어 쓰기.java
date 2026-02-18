@@ -1,27 +1,28 @@
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String remain = sc.nextLine(); // 지우고 남은 수
 
-        int N = 1;
-        int idx = 0; // remain에서 현재 비교할 인덱스
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String s = br.readLine();
 
-        while (idx < remain.length()) {
-            String current = String.valueOf(N);
-            int curIdx = 0; // current 숫자에서 비교할 인덱스
+        int idx = 0;     // s에서 현재 매칭해야 할 위치
+        int num = 1;     // 1부터 시작
 
-            // remain 문자열을 current 숫자와 매칭하면서 인덱스를 진행함
-            while (curIdx < current.length() && idx < remain.length()) {
-                if (current.charAt(curIdx) == remain.charAt(idx)) {
+        while (idx < s.length()) {
+            String current = String.valueOf(num);
+
+            for (int i = 0; i < current.length(); i++) {
+                if (idx < s.length() && current.charAt(i) == s.charAt(idx)) {
                     idx++;
                 }
-                curIdx++;
             }
-            N++;
+
+            num++;
         }
 
-        System.out.println(N-1); // 마지막으로 증가시킨 N은 불필요하므로 1을 빼줌
+        System.out.println(num - 1);
     }
 }
