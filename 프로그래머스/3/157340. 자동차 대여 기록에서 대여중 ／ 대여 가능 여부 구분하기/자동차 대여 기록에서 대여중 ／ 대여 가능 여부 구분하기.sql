@@ -3,11 +3,10 @@ SELECT
     CASE
         WHEN MAX(
             CASE
-                WHEN START_DATE <= '2022-10-16'
-                 AND END_DATE   >= '2022-10-16'
-                THEN 1
-                ELSE 0
+                WHEN START_DATE <= '2022-10-16' AND END_DATE >= '2022-10-16'
+                THEN 1 ELSE 0
             END
+            
         ) = 1
         THEN '대여중'
         ELSE '대여 가능'
