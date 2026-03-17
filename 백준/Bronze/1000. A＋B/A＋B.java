@@ -1,12 +1,19 @@
 import java.io.*;
+import java.util.*;
 
-public class Main {
+class Main {
     
     public static void main(String[] args) throws Exception {
         
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] input = br.readLine().split(" ");
-        System.out.println(Integer.parseInt(input[0]) + Integer.parseInt(input[1]));
+        
+        String[] inputs = br.readLine().split(" ");
+        
+        int a = Integer.parseInt(inputs[0]);
+        int b = Integer.parseInt(inputs[1]);
+        
+        System.out.println(a+b);
         
     }
+    
 }
