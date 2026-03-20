@@ -3,33 +3,33 @@ import java.util.*;
 
 public class Main {
     
+    public static int convertInteger(String input) {
+        return Integer.parseInt(input);
+    }
+    
     public static void main(String[] args) throws Exception {
         
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
-        int a = Integer.parseInt(br.readLine());
-        int b = Integer.parseInt(br.readLine());
-        int c = Integer.parseInt(br.readLine());
+        int a = convertInteger(br.readLine());
+        int b = convertInteger(br.readLine());
+        int c = convertInteger(br.readLine());
         
-        long result = (long)(a * b * c);
-        int[] resultAry = new int[10];
+        long result = a * b * c;
+        char[] resultChar = String.valueOf(result).toCharArray();
         
-        // result를 문자열로 바꾼다. -> 하나씩 숫자를 체크하고 idx에 +를 한다.
-        String resToStr = String.valueOf(result);
+        int[] count = new int[10];
         
-        for (int i=0; i<resToStr.length(); i++) {
-           int num = resToStr.charAt(i) - '0';
-           resultAry[num]++; 
+        for (char ch : resultChar) {
+            count[ch - '0']++;
         }
         
         StringBuilder sb = new StringBuilder();
-        
-        for (int i=0; i<resultAry.length; i++) {
-            sb.append(resultAry[i]).append("\n");
+        for (int v : count) {
+            sb.append(v).append("\n");
         }
         
-        System.out.println(sb);
-        
+        System.out.println(sb.toString());
     }
     
 }
