@@ -1,32 +1,31 @@
 import java.io.*;
-import java.util.*;
 
-public class Main {
+class Main {
     
     public static void main(String[] args) throws Exception {
-        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        
-        int n = Integer.parseInt(br.readLine());
+    
+        int tc = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
+    
+        for (int i=0; i<tc; i++) {
         
-        for (int i=0; i<n; i++){
-            String[] input = br.readLine().split(" ");
-            int r = Integer.parseInt(input[0]);
-            String words = input[1];
-            
-            char[] ary = words.toCharArray();
-            
-            for (int j=0; j<ary.length; j++){
-                
-                for (int k=0; k<r; k++){
-                    sb.append(ary[j]);    
+        String[] input = br.readLine().split(" ");
+        String result = "";
+        
+        int loopCount = Integer.parseInt(input[0]);
+        String word = input[1];
+        
+        char[] charAry = word.toCharArray();
+        
+            for (int j=0; j<charAry.length; j++) {
+                for (int k=0; k<loopCount; k++) {
+                    result += String.valueOf(charAry[j]);
                 }
-            
             }
-            sb.append("\n");
-        }
         
-        System.out.println(sb.toString());
+            sb.append(result).append("\n");
+        }
+        System.out.println(sb);
     }
 }
